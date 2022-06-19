@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 
 import { PersonListComponent } from "./list";
 import { PersonInsertComponent } from "./insert";
+import { PersonEditComponent } from "./edit";
 
 export const PersonRoutes: Routes = [
     {
@@ -16,4 +17,8 @@ export const PersonRoutes: Routes = [
         path: 'person/insert',
         component: PersonInsertComponent
     },
+    {
+        path: 'person/edit/:documentNumber',
+        component: PersonEditComponent
+    }
 ]

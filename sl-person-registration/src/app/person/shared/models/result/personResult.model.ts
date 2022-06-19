@@ -1,6 +1,6 @@
-import { Person } from "./person.model";
+import { Person } from "../person.model";
 
-export class PersonSingle {
+export class PersonResult {
     constructor(public data : Person,
                 public errors: string[]) {}
 }

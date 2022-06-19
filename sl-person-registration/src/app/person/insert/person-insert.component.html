@@ -93,7 +93,59 @@
         </div>
         <br/>
       </div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">CEP</label>
+              <input type="text" class="form-control" id="zipCodeInput" #personZipCode="ngModel" [(ngModel)]="person.zipCode" name="personZipCode" [ngModelOptions]="{standalone: true}" (change)="searchAddressByZipCode($event)">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Logradouro</label>
+              <input type="text" class="form-control" id="streetInput" #personStreet="ngModel" [(ngModel)]="person.street" name="personStreet" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Número</label>
+              <input type="text" class="form-control" id="numberInput" #personNumber="ngModel" [(ngModel)]="person.number" name="personNumber" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Bairro</label>
+              <input type="text" class="form-control" id="neighborhoodInput" #personNeighborhood="ngModel" [(ngModel)]="person.neighborhood" name="personNeighborhood" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Complemento</label>
+              <input type="text" class="form-control" id="complementInput" #personComplement="ngModel" [(ngModel)]="person.complement" name="personComplement" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Cidade</label>
+              <input type="text" class="form-control" id="cityInput" #personCity="ngModel" [(ngModel)]="person.city" name="personCity" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Estado</label>
+              <input type="text" class="form-control" id="streetInput" #personState="ngModel" [(ngModel)]="person.state" name="personState" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+        </div>
+        <br/>
+      </div>
     </div>
     <div class="alert alert-danger" *ngIf="personName.errors && (personName.dirty || personName.touched)">
       <div [hidden]="!personName.errors.required">
@@ -110,7 +162,7 @@
     </div>
     <div class="alert alert-danger" [hidden]="personType.length > 0">
       <div>
-        Informe o time da pessoa
+        Informe o tipo da pessoa
       </div>
     </div>
     <div class="row">

@@ -5,14 +5,17 @@ import { FormsModule } from '@angular/forms';
 
 import { PersonApiService } from './shared';
 import { LookupApiService } from './shared';
-import { ContactApiService } from './shared';
+import { AddressApiService } from './shared';
+
 import { PersonListComponent } from './list';
 import { PersonInsertComponent } from './insert';
+import { PersonEditComponent } from './edit';
 
 @NgModule({
   declarations: [
     PersonListComponent,
-    PersonInsertComponent
+    PersonInsertComponent,
+    PersonEditComponent
   ],
   imports: [
     FormsModule,
@@ -22,7 +25,7 @@ import { PersonInsertComponent } from './insert';
   providers: [ 
     PersonApiService,
     LookupApiService,
-    ContactApiService
+    AddressApiService
   ]
 })
 export class PersonModule { }

@@ -1,3 +1,5 @@
+import { Lookup } from "..";
+
 export class Person {
     private listTypes: string[];
 
@@ -6,6 +8,7 @@ export class Person {
                 public documentNumber?: number,
                 public gender?: string,
                 public birthDate?: string,
+                public zipCode?: number,
                 public street?: string,
                 public number?: string,
                 public neighborhood?: string,
@@ -41,5 +44,15 @@ export class Person {
             }
             this.types = this.listTypes;
         }
+    }
+
+    setAddress(zipCode: number, street: string, number: string, neighborhood: string, complement: string, city: string, state: string): void {
+        this.zipCode = zipCode;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.complement = complement;
+        this.city = city;
+        this.state = state;
     }
 }

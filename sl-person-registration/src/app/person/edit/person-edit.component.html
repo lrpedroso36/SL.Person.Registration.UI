@@ -1,0 +1,200 @@
+<form #formPerson="ngForm">
+    <br/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <h3>Editar</h3>
+          </div>
+        </div>
+      </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Gerais</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Contato</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Endereço</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <br/>
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <div class="card">
+                    <div class="card-header">
+                      Tipo pessoa
+                    </div>          
+                    <div class="card-body text-center">
+                      <div class="form-check form-check-inline" *ngFor="let item of lookups">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" [checked]="item.checked" (change)="setPersonType(item)">
+                        <label class="form-check-label" for="inlineCheckbox{{item.id}}">{{item.description}}</label>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Nome</label>
+                  <input type="text" class="form-control" id="nameInput" minlength="5" required #personName="ngModel" name="personName" [(ngModel)]="person.name" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Documento</label>
+                    <input type="number" class="form-control" id="documentNumberInput" required #personDocumentNumber="ngModel" name="personDocumentNumber" [(ngModel)]="person.documentNumber" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleFormControlInput1">Data Nascimento</label>
+                    <input type="date" class="form-control" id="birthDateInput" #personBirthDate="ngModel" [(ngModel)]="person.birthDate" (change)="setBirthDate($event)" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Genero</label>
+                    <select class="form-control" id="genderSelect" (change)="setGender($event)">
+                      <option value="">Selecione</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                      <option value="Outros">Outros</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <br/>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">DDD</label>
+                  <input type="number" class="form-control" id="dddInput" #personDDD="ngModel" [(ngModel)]="person.ddd" name="personDDD" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Telefone</label>
+                  <input type="number" class="form-control" id="phoneNumberInput" #personPhoneNumber="ngModel" [(ngModel)]="person.phoneNumber" name="personPhoneNumber" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+            <br/>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">CEP</label>
+                  <input type="text" class="form-control" id="zipCodeInput" #personZipCode="ngModel" [(ngModel)]="person.zipCode" name="personZipCode" [ngModelOptions]="{standalone: true}" (change)="searchAddressByZipCode($event)">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Logradouro</label>
+                  <input type="text" class="form-control" id="streetInput" #personStreet="ngModel" [(ngModel)]="person.street" name="personStreet" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Número</label>
+                  <input type="text" class="form-control" id="numberInput" #personNumber="ngModel" [(ngModel)]="person.number" name="personNumber" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Bairro</label>
+                  <input type="text" class="form-control" id="neighborhoodInput" #personNeighborhood="ngModel" [(ngModel)]="person.neighborhood" name="personNeighborhood" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Complemento</label>
+                  <input type="text" class="form-control" id="complementInput" #personComplement="ngModel" [(ngModel)]="person.complement" name="personComplement" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Cidade</label>
+                  <input type="text" class="form-control" id="cityInput" #personCity="ngModel" [(ngModel)]="person.city" name="personCity" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Estado</label>
+                  <input type="text" class="form-control" id="streetInput" #personState="ngModel" [(ngModel)]="person.state" name="personState" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+            </div>
+            <br/>
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="personName.errors && (personName.dirty || personName.touched)">
+          <div [hidden]="!personName.errors.required">
+            Digite o nome.
+          </div>
+          <div [hidden]="!personName.errors.minlength">
+            A nome deve conter ao menos 5 caracteres.
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="personDocumentNumber.errors && (personDocumentNumber.dirty || personDocumentNumber.touched)">
+          <div [hidden]="!personDocumentNumber.errors.required">
+            Digite o documento.
+          </div>
+        </div>
+        <div class="alert alert-danger" [hidden]="personType.length > 0">
+          <div>
+            Informe o tipo da pessoa
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-success me-md-2" type="button" (click)="update()">Salvar</button>
+                <button class="btn btn-primary" type="button" [routerLink]="['/person/list']">Voltar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Atenção</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErros()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <span *ngFor="let error of errors">
+                    {{error}}
+                  </span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>

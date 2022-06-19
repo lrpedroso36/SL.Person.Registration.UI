@@ -3,7 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 declare var $ : any;
 
-import { Person, Lookup, Contact, LookupApiService, PersonApiService, ContactApiService } from '../shared';
+import { Person, Lookup, LookupApiService, PersonApiService, AddressApiService, Address } from '../shared';
+import { AddressResult } from '../shared/models/result/addressResult.model';
 
 @Component({
   selector: 'app-person-insert',
@@ -23,7 +24,7 @@ export class PersonInsertComponent implements OnInit {
   constructor(private router: Router,
               private lookupApiService: LookupApiService,
               private personApiService: PersonApiService,
-              private contactApiService: ContactApiService) { }
+              private addressApiService: AddressApiService) { }
 
   ngOnInit(): void {
     this.person = new Person();
@@ -54,34 +55,29 @@ export class PersonInsertComponent implements OnInit {
   }
 
   insert(): void{
+    console.log(this.person);
      if(this.formPerson.form.valid && this.personType.length > 0){
         this.insertPerson();
     }
   }
 
+  searchAddressByZipCode(event: any){
+    this.addressApiService.getAddress(event.target.value).subscribe((addressResult : AddressResult) =>
+    {
+        var address = addressResult.data;
+        this.person.setAddress(address.zipCode, address.street, address.number, address.neighborhood, address.complement, address.city, address.state);
+    }, (errors) => {
+       this.showNotification(errors);
+       return;
+    })
+  }
+
   private insertPerson() : void{
     this.personApiService.insertPerson(this.person).subscribe(() => {
-      let contact = new Contact(this.person.ddd, this.person.phoneNumber);
-      if(contact.isValid()){
-        this.contactApiService.insertContact(this.person.documentNumber, contact)
-          .subscribe(() => {
-          }, (errors) => {
-              this.showNotification(errors);
-              this.deletePerson();
-              return;
-          });
-        }
         this.router.navigate(["/person/list"]);
     }, (errors) => {
         this.showNotification(errors);
         return;
-    });
-  }
-
-  private deletePerson(): void {
-    this.personApiService.deletePerson(this.person.documentNumber).subscribe(() => {
-    }, (exception) => { 
-      console.log(exception);
     });
   }
 
