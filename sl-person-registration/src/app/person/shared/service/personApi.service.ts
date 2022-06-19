@@ -1,39 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 
 import { PersonList } from '../models/personList.model';
 import { Person } from '../models/person.model';
 import { Result } from '../models/result.model';
-import { Configuration } from '../configuration/configuration.model';
+import { BaseApiService } from './baseApiService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
-  private configuration = {} as Configuration;
-
+export class PersonApiService extends BaseApiService {
+  
   constructor(private httpClient: HttpClient) { 
-    this.configuration = new Configuration();
+    super();
   }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  getPersonParameter(parameter : string) : Observable<PersonList> {
-    return this.httpClient.get<PersonList>(this.configuration.urlApiPerson + 'list/' + parameter)
-      .pipe(retry(2))
+  getPeopleParameter(parameter : string) : Observable<PersonList> {
+    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list/${parameter}`;
+    return this.httpClient.get<PersonList>(urlGetPeopleParameter)
+      .pipe(retry(1), catchError(super.handleError))
   }
 
   insertPerson(person: Person) : Observable<Result> {
       return this.httpClient.post<Result>(this.configuration.urlApiPerson, person)
-      .pipe(retry(2));
+      .pipe(retry(1), catchError(this.handleError));
   }
 
   deletePerson(documentNumber: number) : Observable<Result>{
     return this.httpClient.delete<Result>(this.configuration.urlApiPerson + documentNumber)
-      .pipe(retry(2));
+      .pipe(retry(1), catchError(this.handleError));
   }
 }

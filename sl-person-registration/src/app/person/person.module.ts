@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { PersonService } from './shared';
+import { PersonApiService } from './shared';
+import { LookupApiService } from './shared';
+import { ContactApiService } from './shared';
 import { PersonListComponent } from './list';
 import { PersonInsertComponent } from './insert';
 
@@ -18,7 +20,9 @@ import { PersonInsertComponent } from './insert';
     RouterModule
   ],
   providers: [ 
-    PersonService
+    PersonApiService,
+    LookupApiService,
+    ContactApiService
   ]
 })
 export class PersonModule { }

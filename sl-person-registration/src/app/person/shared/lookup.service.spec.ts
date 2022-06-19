@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LookupService } from './service/lookup.service';
+import { LookupApiService } from './service/lookupApi.service';
 
 describe('LookupService', () => {
-  let service: LookupService;
+  let service: LookupApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LookupService);
+    service = TestBed.inject(LookupApiService);
   });
 
   it('should be created', () => {

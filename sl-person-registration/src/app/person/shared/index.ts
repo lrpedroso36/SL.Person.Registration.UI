@@ -7,6 +7,6 @@ export * from './models/contact.model';
 
 export * from './configuration/configuration.model';
 
-export * from './service/person.service';
-export * from './service/lookup.service';
-export * from './service/contact.service';
+export * from './service/personApi.service';
+export * from './service/lookupApi.service';
+export * from './service/contactApi.service';

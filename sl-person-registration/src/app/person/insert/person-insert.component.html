@@ -31,7 +31,7 @@
                 </div>          
                 <div class="card-body text-center">
                   <div class="form-check form-check-inline" *ngFor="let item of lookups">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" (change)="setPersonType($event)" required>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" (change)="setPersonType($event)">
                     <label class="form-check-label" for="inlineCheckbox{{item.id}}">{{item.description}}</label>
                   </div>
                 </div>
@@ -44,7 +44,7 @@
           <div class="col">
             <div class="form-group">
               <label for="exampleFormControlInput1">Nome</label>
-              <input type="text" class="form-control" id="nameInput" minlength="5" required #personName="ngModel" name="personName" [(ngModel)]="person.name" [ngModelOptions]="{standalone: false}">
+              <input type="text" class="form-control" id="nameInput" minlength="5" required #personName="ngModel" name="personName" [(ngModel)]="person.name" [ngModelOptions]="{standalone: true}">
             </div>
           </div>
         </div>
@@ -53,13 +53,13 @@
             <div class="col">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Documento</label>
-                <input type="number" class="form-control" id="documentNumberInput" required #personDocumentNumber="ngModel" name="personDocumentNumber" [(ngModel)]="person.documentNumber" [ngModelOptions]="{standalone: false}">
+                <input type="number" class="form-control" id="documentNumberInput" required #personDocumentNumber="ngModel" name="personDocumentNumber" [(ngModel)]="person.documentNumber" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Data Nascimento</label>
-                <input type="date" class="form-control" id="birthDateInput" #personBirthDate="ngModel" [(ngModel)]="person.birthDate" (change)="setBirthDate($event)" [ngModelOptions]="{standalone: false}">
+                <input type="date" class="form-control" id="birthDateInput" #personBirthDate="ngModel" [(ngModel)]="person.birthDate" (change)="setBirthDate($event)" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
             <div class="col">
@@ -81,13 +81,13 @@
           <div class="col">
             <div class="form-group">
               <label for="exampleFormControlInput1">DDD</label>
-              <input type="number" class="form-control" id="dddInput" #personDDD="ngModel" [(ngModel)]="person.ddd" name="personDDD" [ngModelOptions]="{standalone: false}">
+              <input type="number" class="form-control" id="dddInput" #personDDD="ngModel" [(ngModel)]="person.ddd" name="personDDD" [ngModelOptions]="{standalone: true}">
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="exampleFormControlInput1">Telefone</label>
-              <input type="number" class="form-control" id="phoneNumberInput" #personPhoneNumber="ngModel" [(ngModel)]="person.phoneNumber" name="personPhoneNumber" [ngModelOptions]="{standalone: false}">
+              <input type="number" class="form-control" id="phoneNumberInput" #personPhoneNumber="ngModel" [(ngModel)]="person.phoneNumber" name="personPhoneNumber" [ngModelOptions]="{standalone: true}">
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Atenção</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErros()"></button>
       </div>
       <div class="modal-body">
         <div class="row">

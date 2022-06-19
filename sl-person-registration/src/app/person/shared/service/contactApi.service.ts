@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 
 import { Contact } from '../models/contact.model';
 import { Result } from '../models/result.model';
-import { Configuration } from '../configuration/configuration.model';
+import { BaseApiService } from './baseApiService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContactService {
-    private configuration = {} as Configuration;
-
+export class ContactApiService extends BaseApiService {
     constructor(private httpClient: HttpClient) { 
-        this.configuration = new Configuration();
+        super();
     }
 
     httpOptions = {
@@ -22,7 +19,8 @@ export class ContactService {
     }
 
     insertContact(documentNumber: number, contact: Contact) {
-        return this.httpClient.post<Result>(this.configuration.urlApiContact + documentNumber, contact)
-        .pipe(retry(2)); 
+        var urlInsertContact = `${this.configuration.urlApiContact}${documentNumber}`;
+        return this.httpClient.post<Result>(urlInsertContact, contact)
+        .pipe(retry(1), catchError(this.handleError)); 
     }
 }
