@@ -16,9 +16,7 @@ export class PersonInsertComponent implements OnInit {
   @ViewChild('formPerson', { static: true }) formPerson: NgForm;
   
   person = {} as Person;
-  lookups: Lookup[] = [];
 
-  personType: string[] = [];
   errors: string[] = [];
 
   constructor(private router: Router,
@@ -29,16 +27,11 @@ export class PersonInsertComponent implements OnInit {
   ngOnInit(): void {
     this.person = new Person();
     this.getPersonType();
+    this.getGenderType();
   }
 
   clearErros(): void{
     this.errors = [];
-  }
-
-  getPersonType(){
-    this.lookupApiService.getPersonType().subscribe((resultLookups: Lookup[]) => {
-      this.lookups = resultLookups;
-    })
   }
 
   setGender(event: any) :void{
@@ -46,24 +39,29 @@ export class PersonInsertComponent implements OnInit {
   } 
 
   setPersonType(event: any): void {
-     this.person.setType(event.target.value);
-     this.personType = this.person.types;
+    if(event.target.value !== undefined){
+      this.person.setType(event.target.value);
+    }
   }
 
   setBirthDate(event: any): void {
-    this.setBirthDate(event.target.value);
+    if(event.target.value === undefined){
+      this.setBirthDate(event.target.value);
+    }
+  }
+
+  get getTypes() : boolean{
+    return this.person.types === undefined || this.person.types.length > 0;
   }
 
   insert(): void{
-    console.log(this.person);
-     if(this.formPerson.form.valid && this.personType.length > 0){
+     if(this.formPerson.form.valid && (this.person.types != undefined && this.person.types.length > 0)){
         this.insertPerson();
     }
   }
 
   searchAddressByZipCode(event: any){
-    this.addressApiService.getAddress(event.target.value).subscribe((addressResult : AddressResult) =>
-    {
+    this.addressApiService.getAddress(event.target.value).subscribe((addressResult : AddressResult) =>{
         var address = addressResult.data;
         this.person.setAddress(address.zipCode, address.street, address.number, address.neighborhood, address.complement, address.city, address.state);
     }, (errors) => {
@@ -74,15 +72,32 @@ export class PersonInsertComponent implements OnInit {
 
   private insertPerson() : void{
     this.personApiService.insertPerson(this.person).subscribe(() => {
-        this.router.navigate(["/person/list"]);
+        this.router.navigate(["/person/list", this.person.documentNumber]);
     }, (errors) => {
         this.showNotification(errors);
         return;
     });
   }
 
+  private getPersonType(){
+    this.lookupApiService.getPersonType().subscribe((lookups: Lookup[]) => {
+      this.person.getLookupsPersonType(lookups);
+    }, (errors) => { this.redirectToPersonList(errors); });
+  }
+
+  private getGenderType(){
+    this.lookupApiService.getGender().subscribe((lookups:Lookup[]) => {
+      this.person.getLookupsGender(lookups);
+    }, (errors) => { this.redirectToPersonList(errors); });
+  }
+
   private showNotification(errors: string[]): void{
     this.errors = errors;
     $('#notificationModal').modal('show');
+  }
+
+  private redirectToPersonList(errors : string): void{
+    console.log(errors);
+    this.router.navigate(["/person/list"]);
   }
 }

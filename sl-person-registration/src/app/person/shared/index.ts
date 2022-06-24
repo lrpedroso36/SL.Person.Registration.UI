@@ -12,3 +12,4 @@ export * from './configuration/configuration.model';
 export * from './service/personApi.service';
 export * from './service/lookupApi.service';
 export * from './service/addressApi.service';
+export * from './service/assignmentApi.service';

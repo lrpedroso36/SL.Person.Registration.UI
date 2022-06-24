@@ -13,10 +13,10 @@
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Gerais</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Contato</button>
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contato</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Endereço</button>
+            <button class="nav-link" id="address-tab" data-bs-toggle="tab" data-bs-target="#address" type="button" role="tab" aria-controls="address" aria-selected="false">Endereço</button>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -30,8 +30,8 @@
                       Tipo pessoa
                     </div>          
                     <div class="card-body text-center">
-                      <div class="form-check form-check-inline" *ngFor="let item of lookups">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" [checked]="item.checked" (change)="setPersonType(item)">
+                      <div class="form-check form-check-inline" *ngFor="let item of person.lookupsPersonType">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" [checked]="item.checked" (change)="setPersonType($event)">
                         <label class="form-check-label" for="inlineCheckbox{{item.id}}">{{item.description}}</label>
                       </div>
                     </div>
@@ -59,24 +59,21 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Data Nascimento</label>
-                    <input type="date" class="form-control" id="birthDateInput" #personBirthDate="ngModel" [(ngModel)]="person.birthDate" (change)="setBirthDate($event)" [ngModelOptions]="{standalone: true}">
+                    <input type="date" class="form-control" id="birthDateInput" (change)="setBirthDate($event)" #personBirthDate="ngModel" name="personBirthDate" [(ngModel)]="person.birthDate" [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">Genero</label>
                     <select class="form-control" id="genderSelect" (change)="setGender($event)">
-                      <option value="">Selecione</option>
-                      <option value="Masculino">Masculino</option>
-                      <option value="Feminino">Feminino</option>
-                      <option value="Outros">Outros</option>
+                      <option *ngFor="let item of person.lookupsGenderType" [selected]="item.checked" value="{{item.name}}">{{item.description}}</option>
                     </select>
                   </div>
                 </div>
               </div>
               <br/>
           </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -93,7 +90,7 @@
             </div>
             <br/>
           </div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -160,7 +157,7 @@
             Digite o documento.
           </div>
         </div>
-        <div class="alert alert-danger" [hidden]="personType.length > 0">
+        <div class="alert alert-danger" [hidden]="getTypes">
           <div>
             Informe o tipo da pessoa
           </div>

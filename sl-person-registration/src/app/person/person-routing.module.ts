@@ -14,6 +14,10 @@ export const PersonRoutes: Routes = [
         component: PersonListComponent
     },
     {
+        path: 'person/list/:documentNumber',
+        component: PersonListComponent
+    },
+    {
         path: 'person/insert',
         component: PersonInsertComponent
     },

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { uniqueSort } from 'jquery';
 declare var $ : any;
 
-import { PersonApiService, Person, PeopleResult} from '../shared';
+import { PersonApiService, Person, PeopleResult, AssignmentApiService} from '../shared';
 
 @Component({
   selector: 'app-person-list',
@@ -11,21 +13,23 @@ import { PersonApiService, Person, PeopleResult} from '../shared';
 export class PersonListComponent implements OnInit {
   people: Person[] = [];
   errors: string[] = [];
+  private parameter: string;
 
-  constructor(private personService: PersonApiService) { }
+  constructor(private route: ActivatedRoute,
+              private personService: PersonApiService,
+              private assigmentApiService: AssignmentApiService) { }
 
   ngOnInit(): void {
+    let documentNumber = this.route.snapshot.params['documentNumber'];
+    if(documentNumber != undefined){
+      this.getPeopleInService(documentNumber);
+    }
   }
 
   getPeople(event: any) {
     var parameter = event.target.value;
-    if(parameter != null && parameter.length > 0){
-      this.personService.getPeopleParameter(event.target.value).subscribe((peopleResult: PeopleResult) => {
-        this.people = peopleResult.data;
-      }, (errors) => {
-          this.showNotification(errors);
-      });
-    }
+    this.parameter = parameter;
+    this.getPeopleInService(parameter);
   }
 
   deletePerson($event: any, person: Person){
@@ -33,9 +37,32 @@ export class PersonListComponent implements OnInit {
     if(confirm('Deseja remover "' + person.name +'"?')){
       this.personService.deletePerson(person.documentNumber).subscribe((data: {}) => {
         this.errors = [];
+        this.getPeopleInService(this.parameter);
+      }, (errors) => { 
+        this.showNotification(errors);
+      });
+    }
+  }
+
+  presenceAssignment($event: any, person: Person){
+    $event.preventDefault();
+    if(confirm('Confirmar presença para o tarefeiro "' + person.name +'"?')){
+      console.log(person.documentNumber);
+      this.assigmentApiService.insertAssigment(person.documentNumber).subscribe((data: {}) => {
+        this.errors = [];
         this.people = [];
       }, (errors) => { 
         this.showNotification(errors);
+      });
+    }
+  }
+
+  private getPeopleInService(parameter: string):void{
+    if(parameter != null && parameter.length >= 3){
+      this.personService.getPeopleParameter(parameter).subscribe((peopleResult: PeopleResult) => {
+        this.people = peopleResult.data;
+      }, (errors) => {
+          this.showNotification(errors);
       });
     }
   }

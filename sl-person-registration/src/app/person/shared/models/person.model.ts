@@ -1,13 +1,15 @@
 import { Lookup } from "..";
 
 export class Person {
-    private listTypes: string[];
+    public lookupsPersonType: Lookup[] = [];
+    public lookupsGenderType: Lookup[] = [];
+    public birthDate: string;
 
     constructor(public types?: string[],
                 public name?: string,
                 public documentNumber?: number,
                 public gender?: string,
-                public birthDate?: string,
+                birthDate?: string,
                 public zipCode?: number,
                 public street?: string,
                 public number?: string,
@@ -16,34 +18,63 @@ export class Person {
                 public city?: string,
                 public state?: string,
                 public ddd?: number,
-                public phoneNumber?: number) 
+                public phoneNumber?: number,
+                public enabledLaborerPresence? : boolean) 
     {
-        this.listTypes = [];
+        this.birthDate = this.getBirthDate(birthDate);
+    }
+
+    private getBirthDate(birthDate: string) : string {
+        return birthDate === "0001-01-01" ? null : birthDate;
     }
 
     setGender(gender: string):void{
-        if(gender != null && gender.length > 0){
+        if(gender != undefined && gender.length > 0){
             this.gender = gender;
         }
     }
 
     setBirthDate(birthDate: string): void {
-        if(birthDate != null && birthDate.length > 0){
+        if(birthDate != undefined && birthDate.length > 0){
             this.birthDate = birthDate;
         }
     }
 
     setType(type: string): void{
-        if(type != null && type.length > 0){
-            if(this.listTypes.length === 0){
-                this.listTypes.push(type);
-            }else if(this.listTypes.find(x => x === type)){
-                this.listTypes = this.listTypes.filter(x => x !== type);
-            }else if(this.listTypes.find(x => x != type)){
-                this.listTypes.push(type);
+        if(type != null){
+            
+            if(this.types === undefined)
+                this.types = [];
+
+            if(this.types.length === 0){
+                this.types.push(type);
+            }else if(this.types.find(x => x === type)){
+                this.types = this.types.filter(x => x !== type);
+            }else if(this.types.find(x => x != type)){
+                this.types.push(type);
             }
-            this.types = this.listTypes;
         }
+    }
+
+    getLookupsPersonType(listLookups: Lookup[]): void
+    {
+      if(this.types === undefined)
+         this.types = [];
+
+      for (let i = 0; i < listLookups.length; i++) {
+          const resultChecked = this.types === undefined ? false : this.types.find(x => x == listLookups[i].name) != null;
+          const lookup = new Lookup(listLookups[i].id, listLookups[i].name, listLookups[i].description, resultChecked);
+          this.lookupsPersonType.push(lookup);
+        }  
+    }
+
+    getLookupsGender(listLookups: Lookup[]): void{
+        this.lookupsGenderType.push(new Lookup(0, null, "Selecione"));
+        for (let i = 0; i < listLookups.length; i++) {
+            const resultChecked = this.gender === undefined ? false : this.gender === listLookups[i].name;
+            const lookup = new Lookup(listLookups[i].id, listLookups[i].name, listLookups[i].description, resultChecked);
+            this.lookupsGenderType.push(lookup);
+        }  
     }
 
     setAddress(zipCode: number, street: string, number: string, neighborhood: string, complement: string, city: string, state: string): void {

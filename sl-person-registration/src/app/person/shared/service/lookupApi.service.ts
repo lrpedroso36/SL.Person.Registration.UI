@@ -24,4 +24,10 @@ export class LookupApiService extends BaseApiService {
     return this.httpClient.get<Lookup[]>(urlLookupPersonType)
       .pipe(retry(2), catchError(this.handleError));
   }
+
+  getGender() : Observable<Lookup[]>{
+    var urlGender = `${this.configuration.urlApiLookup}/gender`;
+    return this.httpClient.get<Lookup[]>(urlGender)
+      .pipe(retry(2), catchError(this.handleError));
+  }
 }
