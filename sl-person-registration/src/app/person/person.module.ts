@@ -10,12 +10,14 @@ import { AddressApiService } from './shared';
 import { PersonListComponent } from './list';
 import { PersonInsertComponent } from './insert';
 import { PersonEditComponent } from './edit';
+import { PersonInterviewComponent } from './interview';
 
 @NgModule({
   declarations: [
     PersonListComponent,
     PersonInsertComponent,
-    PersonEditComponent
+    PersonEditComponent,
+    PersonInterviewComponent
   ],
   imports: [
     FormsModule,

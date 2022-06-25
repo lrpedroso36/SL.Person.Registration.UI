@@ -30,4 +30,22 @@ export class LookupApiService extends BaseApiService {
     return this.httpClient.get<Lookup[]>(urlGender)
       .pipe(retry(2), catchError(this.handleError));
   }
+
+  getInterview() : Observable<Lookup[]>{
+    var urlInterview = `${this.configuration.urlApiLookup}/interview`;
+    return this.httpClient.get<Lookup[]>(urlInterview)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  getTreatment() : Observable<Lookup[]>{
+    var ulrTratament = `${this.configuration.urlApiLookup}/treatment`;
+    return this.httpClient.get<Lookup[]>(ulrTratament)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  getWeakDay() : Observable<Lookup[]>{
+    var urlWaekDay = `${this.configuration.urlApiLookup}/weakDay`;
+    return this.httpClient.get<Lookup[]>(urlWaekDay)
+      .pipe(retry(2), catchError(this.handleError));
+  }
 }

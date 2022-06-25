@@ -1,0 +1,67 @@
+<form #formPerson="ngForm">
+    <br/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <h3>Tratamento Espiritual  - <label>{{person.name}}</label></h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Tratamento</label>
+            <select class="form-control" id="treatmentSelect" (change)="setTreatment($event)">
+              <option value="null">Selecione</option>  
+              <option *ngFor="let item of treatmentTypes" [selected]="item.checked" value="{{item.name}}">{{item.description}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+              <label>Entrevista</label>
+              <select class="form-control" id="interviewSelect" (change)="setInterview($event)">
+                <option value="null">Selecione</option>  
+                <option *ngFor="let item of interviewTypes" [selected]="item.checked" value="{{item.name}}">{{item.description}}</option>
+              </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+              <label>Dia da semana</label>
+              <select class="form-control" id="waekDaySelect" (change)="setWeakDay($event)">
+                <option value="null">Selecione</option>  
+                <option *ngFor="let item of weakDayTypes" [selected]="item.checked" value="{{item.name}}">{{item.description}}</option>
+              </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+              <label>Quantidade</label>
+              <input type="number" class="form-control" id="amountInput" required>
+            </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label>Parecer</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-success me-md-2" type="button">Salvar</button>
+              <button class="btn btn-primary" type="button" [routerLink]="['/person/list', person.documentNumber]">Voltar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>

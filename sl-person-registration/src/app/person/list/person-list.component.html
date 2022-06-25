@@ -1,11 +1,13 @@
 <br/>
 <div class="container">
-  <div >
-    <div class="col">
-      <h3>Lista de pessoas</h3>
+  <div class="card">      
+      <div class="card-body text-center">
+        <div class="btn-group">
+          <button type="button" *ngFor="let item of lookups" class="btn btn-outline-primary" (click)="getPeopleByPersonType(item)">{{item.description}}</button>
+      </div>
     </div>
   </div>
-  
+  <br/>
   <div class="input-group mb-3">
     <input type="text" class="form-control" id="search" placeholder="Digite no mínimo 3 caracteres, para pesquisar por nome ou documento" (keyup)="getPeople($event)">
     <button type="button" class="btn btn-outline-success" [routerLink]="['/person/insert']" title="Inserir Frequentador">
@@ -15,62 +17,84 @@
       </svg>
    </button>
   </div>
-  <div >
-    <div class="col">
-      <table class="table table-sm table-striped table-bordered table-hover">
-        <tbody>
-          <tr>
-           <th>Nocumento</th>
-           <th>Nome</th>
-           <th class="text-center">Entrevista</th>
-            <th class="text-center">Tarefa</th>
-            <th class="text-center">Cadastro</th>
-          </tr>
-          <tr *ngFor="let person of people">
-            <td>
-                {{person.documentNumber}}
-            </td>
-            <td>
-              {{person.name}}
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-outline-secondary" title="Inserir entrevista">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
-                  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                  <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-              </button>
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-outline-primary" title="Presença Tarefeiro" (click)="presenceAssignment($event, person)" [hidden]="!person.enabledLaborerPresence">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
-                  <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                  <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                </svg>
-              </button>    
-            </td>
-            <td class="text-center">
-              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                <button type="button" class="btn btn-outline-warning" title="Editar Frequentador" [routerLink]="['/person/edit', person.documentNumber]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  <div *ngFor="let person of people">
+  <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>{{person.name}}</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{person.documentNumber}}</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="text-center" [hidden]="!person.enabledLaborerPresence">
+              <label>Tarefa</label>
+              <div class="form-group">
+                <button type="button" class="btn btn-outline-primary position-relative" title="Presença Tarefeiro" (click)="presenceAssignment($event, person)" [disabled]="person.laborerPresenceConfirmed">
+                  <svg width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
+                    <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                  </svg>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]= "{ 'bg-danger' : !person.laborerPresenceConfirmed, 'bg-success': person.laborerPresenceConfirmed }">
+                    {{person.laborerPresenceConfirmed ? "1" : "0"}}
+                  </span>
+                </button>    
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="text-center">
+              <label>Entrevista</label>
+              <div class="form-group">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-secondary" title="Inserir entrevista" [routerLink]="['/person/interview', person.documentNumber]">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+                      <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                      <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="text-center">
+              <label>Cadastro</label>
+              <div class="form-group">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-warning" title="Editar Frequentador" [routerLink]="['/person/edit', person.documentNumber]">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
                     </svg>
-                </button>
-                <button type="button" class="btn btn-outline-danger" title="Excluir Frequentador" (click)="deletePerson($event, person)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" title="Excluir Frequentador" (click)="deletePerson($event, person)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                     <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                  </svg>
-                </button>
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>{{person.types}}</label>
+            </div>
+          </div> 
+        </div>
+      </div> 
+ </div>
+ <br/>
 </div>
 
 <!-- Modal -->

@@ -28,6 +28,12 @@ export class PersonApiService extends BaseApiService {
       .pipe(retry(1), catchError(super.handleError))
   }
 
+  getPeopleByPersonType(personType : string) : Observable<PeopleResult> {
+    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list-persontype/${personType}`;
+    return this.httpClient.get<PeopleResult>(urlGetPeopleParameter)
+      .pipe(retry(1), catchError(super.handleError))
+  }
+
   getPerson(documentNumber: number) : Observable<PersonResult>{
     var urlGetPerson = `${this.configuration.urlApiPerson}${documentNumber}`;
     return this.httpClient.get<PersonResult>(urlGetPerson)

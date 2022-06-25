@@ -19,7 +19,8 @@ export class Person {
                 public state?: string,
                 public ddd?: number,
                 public phoneNumber?: number,
-                public enabledLaborerPresence? : boolean) 
+                public enabledLaborerPresence? : boolean,
+                public laborerPresenceConfirmed? : boolean) 
     {
         this.birthDate = this.getBirthDate(birthDate);
     }
