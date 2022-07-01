@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { uniqueSort } from 'jquery';
+
 declare var $ : any;
 
 import { PersonApiService, Person, PeopleResult, AssignmentApiService, Lookup, LookupApiService} from '../shared';
@@ -50,19 +50,6 @@ export class PersonListComponent implements OnInit {
         this.errors = [];
       }, (errors) => { 
         this.showNotification(errors);
-      });
-    }
-  }
-
-  presenceAssignment($event: any, person: Person){
-    $event.preventDefault();
-    if(confirm('Confirmar presença para o tarefeiro "' + person.name +'"?')){
-      this.assigmentApiService.insertAssigment(person.documentNumber).subscribe((data: {}) => {
-        this.errors = [];
-        this.getPeopleInService(person.name);
-      }, (errors) => { 
-        this.showNotification(errors);
-        this.getPeopleInService(person.name);
       });
     }
   }

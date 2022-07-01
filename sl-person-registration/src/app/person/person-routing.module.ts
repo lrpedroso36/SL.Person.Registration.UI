@@ -4,6 +4,8 @@ import { PersonListComponent } from "./list";
 import { PersonInsertComponent } from "./insert";
 import { PersonEditComponent } from "./edit";
 import { PersonInterviewComponent } from "./interview";
+import { PersonLaborerComponent } from "./laborer-list";
+import { PersonInterviewListComponent } from "./interview-list";
 
 export const PersonRoutes: Routes = [
     {
@@ -29,5 +31,13 @@ export const PersonRoutes: Routes = [
     {
         path: 'person/interview/:documentNumber',
         component: PersonInterviewComponent
+    },
+    {
+        path: 'person/laborer-list',
+        component: PersonLaborerComponent
+    },
+    {
+        path: 'person/interview-list',
+        component: PersonInterviewListComponent
     }
 ]

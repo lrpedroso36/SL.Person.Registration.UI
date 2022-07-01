@@ -18,6 +18,7 @@ export class PersonInsertComponent implements OnInit {
   person = {} as Person;
 
   errors: string[] = [];
+  searchAddress: boolean = false;
 
   constructor(private router: Router,
               private lookupApiService: LookupApiService,
@@ -49,23 +50,42 @@ export class PersonInsertComponent implements OnInit {
       this.setBirthDate(event.target.value);
     }
   }
+  
+  get validateTypes() : boolean{
+    return this.person.validateTypes();
+  }
 
-  get getTypes() : boolean{
-    return this.person.types === undefined || this.person.types.length > 0;
+  get validateName() : boolean {
+    return this.person.validateName();
+  }
+
+  get validateDocumentNumber() : boolean {
+    return this.person.validateDocumentNumber();
+  }
+
+  get validate() :boolean{
+    return this.person.validade();
+  }
+
+  get searchAddressInProcess() : boolean {
+    return this.searchAddress;
   }
 
   insert(): void{
-     if(this.formPerson.form.valid && (this.person.types != undefined && this.person.types.length > 0)){
+     if(this.person.validade()){
         this.insertPerson();
     }
   }
 
   searchAddressByZipCode(event: any){
+    this.searchAddress = true;
     this.addressApiService.getAddress(event.target.value).subscribe((addressResult : AddressResult) =>{
         var address = addressResult.data;
         this.person.setAddress(address.zipCode, address.street, address.number, address.neighborhood, address.complement, address.city, address.state);
+        this.searchAddress = false;
     }, (errors) => {
        this.showNotification(errors);
+       this.searchAddress = false;
        return;
     })
   }

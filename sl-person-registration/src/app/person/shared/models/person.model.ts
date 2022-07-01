@@ -1,3 +1,4 @@
+import { uniqueSort } from "jquery";
 import { Lookup } from "..";
 
 export class Person {
@@ -20,7 +21,8 @@ export class Person {
                 public ddd?: number,
                 public phoneNumber?: number,
                 public enabledLaborerPresence? : boolean,
-                public laborerPresenceConfirmed? : boolean) 
+                public laborerPresenceConfirmed? : boolean,
+                public tratamentInProcess? : boolean) 
     {
         this.birthDate = this.getBirthDate(birthDate);
     }
@@ -86,5 +88,21 @@ export class Person {
         this.complement = complement;
         this.city = city;
         this.state = state;
+    }
+
+    validateTypes() : boolean {
+        return this.types != undefined && this.types.length > 0;
+    }
+
+    validateDocumentNumber() : boolean {
+        return this.documentNumber != undefined && this.documentNumber !=0;
+    }
+
+    validateName() : boolean {
+        return this.name != undefined && this.name != "" && this.name.length > 5;
+    }
+
+    validade() : boolean {
+        return this.validateTypes() && this.validateDocumentNumber() && this.validateName();
     }
 }

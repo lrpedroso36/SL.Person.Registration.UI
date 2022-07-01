@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
-import { Address } from '..';
 import { AddressResult } from '../models/result/addressResult.model';
 import { BaseApiService } from './baseApiService';
 

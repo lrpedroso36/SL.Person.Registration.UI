@@ -24,18 +24,15 @@
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="row">
               <div class="col">
-                <div class="form-group">
-                  <div class="card">
-                    <div class="card-header">
-                      Tipo pessoa
-                    </div>          
-                    <div class="card-body text-center">
-                      <div class="form-check form-check-inline" *ngFor="let item of person.lookupsPersonType">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" [checked]="item.checked" (change)="setPersonType($event)">
-                        <label class="form-check-label" for="inlineCheckbox{{item.id}}">{{item.description}}</label>
-                      </div>
-                    </div>
-                  </div>
+                <label for="exampleFormControlInput1">Tipo da pessoa</label>
+                  <div class="card-body text-center form-control" [ngClass]= "{ 'is-invalid' : !validateTypes, 'is-valid': validateTypes }">
+                    <div class="form-check form-check-inline" *ngFor="let item of person.lookupsPersonType">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" [checked]="item.checked" (change)="setPersonType($event)">
+                      <label class="form-check-label" for="inlineCheckbox{{item.id}}">{{item.description}}</label>
+                </div>
+              </div>
+              <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                Selecione o Tipo da pessoa.
               </div>
             </div>
             </div>
@@ -44,7 +41,10 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Nome</label>
-                  <input type="text" class="form-control" id="nameInput" minlength="5" required #personName="ngModel" name="personName" [(ngModel)]="person.name" [ngModelOptions]="{standalone: true}">
+                  <input type="text" class="form-control" id="nameInput" minlength="5" required #personName="ngModel" name="personName" [(ngModel)]="person.name" [ngModelOptions]="{standalone: true}" [ngClass]= "{ 'is-invalid' : !validateName, 'is-valid': validateName }">
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Nome do frequentador inválido.
+                  </div>
                 </div>
               </div>
             </div>
@@ -53,7 +53,10 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleFormControlInput1">Documento</label>
-                    <input type="number" class="form-control" id="documentNumberInput" required #personDocumentNumber="ngModel" name="personDocumentNumber" [(ngModel)]="person.documentNumber" [ngModelOptions]="{standalone: true}">
+                    <input type="number" class="form-control" id="documentNumberInput" required #personDocumentNumber="ngModel" name="personDocumentNumber" [(ngModel)]="person.documentNumber" [ngModelOptions]="{standalone: true}" [ngClass]= "{ 'is-invalid' : !validateDocumentNumber, 'is-valid': validateDocumentNumber }">
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                      Documento do frequentador inválido.
+                    </div>
                   </div>
                 </div>
                 <div class="col">
@@ -144,29 +147,11 @@
             <br/>
           </div>
         </div>
-        <div class="alert alert-danger" *ngIf="personName.errors && (personName.dirty || personName.touched)">
-          <div [hidden]="!personName.errors.required">
-            Digite o nome.
-          </div>
-          <div [hidden]="!personName.errors.minlength">
-            A nome deve conter ao menos 5 caracteres.
-          </div>
-        </div>
-        <div class="alert alert-danger" *ngIf="personDocumentNumber.errors && (personDocumentNumber.dirty || personDocumentNumber.touched)">
-          <div [hidden]="!personDocumentNumber.errors.required">
-            Digite o documento.
-          </div>
-        </div>
-        <div class="alert alert-danger" [hidden]="getTypes">
-          <div>
-            Informe o tipo da pessoa
-          </div>
-        </div>
         <div class="row">
           <div class="col">
             <div class="form-group">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-success me-md-2" type="button" (click)="update()">Salvar</button>
+                <button class="btn btn-success me-md-2" type="button" [disabled]="!validate" (click)="update()">Salvar</button>
                 <button class="btn btn-primary" type="button" [routerLink]="['/person/list']">Voltar</button>
               </div>
             </div>

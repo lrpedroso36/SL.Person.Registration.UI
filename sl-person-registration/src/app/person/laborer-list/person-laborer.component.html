@@ -1,0 +1,63 @@
+<br/>
+<div class="container">
+  <h3>Tarefa</h3>
+  <br/>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" id="search" placeholder="Digite no mínimo 3 caracteres, para pesquisar por nome" (keyup)="getPeople($event)">
+    <button type="button" class="btn btn-outline-primary" title="Buscar Todos" (click)="getPeopleByPersonType()">
+        <span>Buscar </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+   </button>
+  </div>
+  <table class="table table-hover table-light">
+    <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Documento</th>
+          <th class="text-center">Presença</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let person of people">
+            <td>{{person.name}}</td>
+            <td>{{person.documentNumber}}</td>
+            <td class="text-center">
+                <button type="button" class="btn btn-outline-primary position-relative" title="Presença Tarefeiro" (click)="presenceAssignment($event, person)" [disabled]="person.laborerPresenceConfirmed || person.tratamentInProcess">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
+                      <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                      <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                    </svg>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]= "{ 'bg-danger' : !person.laborerPresenceConfirmed, 'bg-success': person.laborerPresenceConfirmed }">
+                      {{person.laborerPresenceConfirmed ? "1" : "0"}}
+                    </span>
+                  </button>    
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+<!-- Modal -->
+<div class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Atenção</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div >
+          <div class="col">
+            <div class="form-group">
+              <span *ngFor="let error of errors">
+                {{error}}
+              </span>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
