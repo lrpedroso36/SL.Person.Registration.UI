@@ -85,7 +85,7 @@ export class PersonInterviewComponent implements OnInit {
   insert(): void{
     if(this.interview.validate()){
       this.interviewApiService.insertInsertInterview(this.interview).subscribe((personResult: PersonResult) => {
-        this.router.navigate(["/person/list", this.interview.interviewerDocument]);
+        this.router.navigate(["/interview/list", this.interview.interviewedDocument]);
       }, (errors) => { this.showNotification(errors) });
     }
   }
@@ -117,7 +117,7 @@ export class PersonInterviewComponent implements OnInit {
   private getInterviewers() {
     this.personApiService.getPeopleByPersonType("Entrevistador").subscribe((peopleResult: PeopleResult) => {
       this.interviewers = peopleResult.data;
-    });
+    }, (errors) => { this.redirectToPersonList(errors); });
   };
 
   private showNotification(errors: string[]): void{
@@ -127,6 +127,6 @@ export class PersonInterviewComponent implements OnInit {
 
   private redirectToPersonList(errors : string): void{
     console.log(errors);
-    this.router.navigate(["/person/list"]);
+    this.router.navigate(["/interview/list"]);
   }
 }

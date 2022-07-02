@@ -19,7 +19,7 @@ export class PersonLaborerComponent implements OnInit {
   
   getPeople(event: any){
     var parameter = event.target.value;
-    this.getPeopleInApi(parameter);
+    this.getPeopleInService(parameter);
   }
 
   getPeopleByPersonType() {
@@ -31,13 +31,15 @@ export class PersonLaborerComponent implements OnInit {
     if(confirm('Confirmar presença para o tarefeiro "' + person.name +'"?')){
       this.assigmentApiService.insertAssigment(person.documentNumber).subscribe((data: {}) => {
         this.errors = [];
+        this.getPeopleInService(person.name.substring(0,5))
       }, (errors) => { 
         this.showNotification(errors);
+        this.getPeopleInService(person.name.substring(0,5))
       });
     }
   }
 
-  private getPeopleInApi(parameter: string){
+  private getPeopleInService(parameter: string){
     if(parameter != null && parameter.length >= 3){
       this.personApiService.getPeopleParameterAndType('Tarefeiro', parameter).subscribe((peopleResult: PeopleResult) => {
         this.people = peopleResult.data;

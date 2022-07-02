@@ -13,6 +13,7 @@ import { PersonEditComponent } from './edit';
 import { PersonInterviewComponent } from './interview';
 import { PersonLaborerComponent } from './laborer-list';
 import { PersonInterviewListComponent } from './interview-list';
+import { PersonInterviewViewComponent } from './interview-view';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PersonInterviewListComponent } from './interview-list';
     PersonEditComponent,
     PersonInterviewComponent,
     PersonLaborerComponent,
-    PersonInterviewListComponent
+    PersonInterviewListComponent,
+    PersonInterviewViewComponent
   ],
   imports: [
     FormsModule,

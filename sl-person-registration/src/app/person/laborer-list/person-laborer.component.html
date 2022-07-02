@@ -16,6 +16,7 @@
         <tr>
           <th>Nome</th>
           <th>Documento</th>
+          <th>Tipo</th>
           <th class="text-center">Presença</th>
         </tr>
     </thead>
@@ -23,6 +24,7 @@
         <tr *ngFor="let person of people">
             <td>{{person.name}}</td>
             <td>{{person.documentNumber}}</td>
+            <td>{{person.types}}</td>
             <td class="text-center">
                 <button type="button" class="btn btn-outline-primary position-relative" title="Presença Tarefeiro" (click)="presenceAssignment($event, person)" [disabled]="person.laborerPresenceConfirmed || person.tratamentInProcess">
                     <svg width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">

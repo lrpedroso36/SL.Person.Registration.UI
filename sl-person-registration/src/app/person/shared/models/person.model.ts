@@ -22,7 +22,9 @@ export class Person {
                 public phoneNumber?: number,
                 public enabledLaborerPresence? : boolean,
                 public laborerPresenceConfirmed? : boolean,
-                public tratamentInProcess? : boolean) 
+                public tratamentInProcess? : boolean,
+                public tratamentPresenceConfirmed? : boolean,
+                public enabledTratamentView? : boolean) 
     {
         this.birthDate = this.getBirthDate(birthDate);
     }

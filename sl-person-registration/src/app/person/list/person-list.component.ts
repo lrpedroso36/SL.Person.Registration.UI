@@ -14,7 +14,7 @@ export class PersonListComponent implements OnInit {
   lookups: Lookup[] = [];
   people: Person[] = [];
   errors: string[] = [];
-  private parameter: string;
+  private personType: string;
 
   constructor(private route: ActivatedRoute,
               private personService: PersonApiService,
@@ -31,12 +31,19 @@ export class PersonListComponent implements OnInit {
 
   getPeople(event: any) {
     var parameter = event.target.value;
-    this.parameter = parameter;
     this.getPeopleInService(parameter);
   }
 
-  getPeopleByPersonType(personType: Lookup) {
-    this.personService.getPeopleByPersonType(personType.name).subscribe((peopleResult: PeopleResult) => {
+  selectPersonType(event: any) : void {
+    this.personType = event.target.value;
+  }
+
+  get validateSelectPersonType(): boolean{
+    return this.personType != undefined && this.personType.length >0;
+  }
+
+  getPeopleByPersonType():void{
+    this.personService.getPeopleByPersonType(this.personType).subscribe((peopleResult: PeopleResult) => {
       this.people = peopleResult.data;
     }, (errors) => {
         this.showNotification(errors);
