@@ -1,4 +1,7 @@
+import { Tratament } from "./tratament.model";
+
 export class Interview {
+    public id: string;
     public interviewerDocument: number;
     public interviewedDocument: number;
     public treatmentType: string;
@@ -6,6 +9,10 @@ export class Interview {
     public type: string;
     public amount: number;
     public opinion: string;
+    public interviewer: string;
+    public status: string;
+    public date: string;
+    public trataments: Tratament[] = [];
 
     constructor() {
 

@@ -1,5 +1,5 @@
 import { uniqueSort } from "jquery";
-import { Lookup } from "..";
+import { Interview, Lookup } from "..";
 
 export class Person {
     public lookupsPersonType: Lookup[] = [];
@@ -24,7 +24,8 @@ export class Person {
                 public laborerPresenceConfirmed? : boolean,
                 public tratamentInProcess? : boolean,
                 public tratamentPresenceConfirmed? : boolean,
-                public enabledTratamentView? : boolean) 
+                public enabledTratamentView? : boolean,
+                public interviews?: Interview[]) 
     {
         this.birthDate = this.getBirthDate(birthDate);
     }

@@ -1,1 +1,108 @@
-<p>person-interview-view works!</p>
+<br/>
+<div class="container">
+  <h3>Entrevistas - {{person.name}}</h3>
+  <br/>
+  <table class="table table-hover table-light">
+    <thead>
+        <tr>
+          <th>Data</th>
+          <th>Entrevistador</th>
+          <th>Status</th>
+          <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of interviews">
+            <td>{{item.date}}</td>
+            <td>{{item.interviewer}}</td>
+            <td>{{item.status}}</td>
+            <td>
+              <a data-bs-toggle="modal" href="#exampleModalToggle" role="button" (click)="showDetails(item)">Detalhes</a>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-primary" type="button" [routerLink]="['/interview/list', person.documentNumber]">Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Detalhes da entrevista</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <strong>Tipo</strong>
+          </div>
+          <div class="col">
+            <strong>Tipo tratamento</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{interview.type}}
+          </div>
+          <div class="col">
+            {{interview.treatmentType}}
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col">
+            <strong>Dia da semana</strong>
+          </div>
+          <div class="col">
+            <strong>Quantidade</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{interview.weakDayType}}
+          </div>
+          <div class="col">
+            {{interview.amount}}
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col">
+            <strong>Parecer</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            {{interview.opinion}}
+          </div>
+        </div>
+        <br/>
+        <table class="table table-hover">
+          <thead>
+              <tr>
+                <th>Data</th>
+                <th>Presença</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let tratament of interview.trataments">
+                  <td>{{tratament.date}}</td>
+                  <td>{{tratament.presence}}</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
