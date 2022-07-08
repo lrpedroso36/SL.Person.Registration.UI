@@ -2,15 +2,52 @@
 <div class="container">
   <h3>Tarefa</h3>
   <br/>
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" id="search" placeholder="Digite no mínimo 3 caracteres, para pesquisar por nome" (keyup)="getPeople($event)">
-    <button type="button" class="btn btn-outline-primary" title="Buscar Todos" (click)="getPeopleByPersonType()">
-        <span>Buscar </span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-   </button>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Tipo de pessoa</label>      
+        <select class="form-control" id="treatmentSelect" (change)="selectPersonType($event)">
+          <option value="">Selecione</option>  
+           <option *ngFor="let item of lookups" value="{{item.name}}">{{item.description}}</option> 
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Nome</label>      
+        <input type="text" class="form-control" id="search" placeholder="Digite no mínimo 3 caracteres" (keyup)="selectName($event)" [disabled]="validateName">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Documento</label>      
+        <input type="number" class="form-control" id="search" placeholder="Digite o documento" (keyup)="selectDocumentNumner($event)" [disabled]="validateDocumentNumber">
+      </div>
+    </div>
   </div>
+  <br/>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-outline-primary" title="Buscar Todos" (click)="getPeople()" [disabled]="!validateSelectParameters">
+            <span>Buscar </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn-outline-success" [routerLink]="['/person/insert']" title="Inserir Frequentador">
+            <span>Novo </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+              <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+         </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
   <table class="table table-hover table-light">
     <thead>
         <tr>
@@ -26,6 +63,12 @@
             <td>{{person.documentNumber}}</td>
             <td>{{person.types}}</td>
             <td class="text-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary" title="Visualizar Presença" [routerLink]="['/laborer/view', person.documentNumber]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg>
+                </button>
                 <button type="button" class="btn btn-outline-primary position-relative" title="Presença Tarefeiro" (click)="presenceAssignment($event, person)" [disabled]="person.laborerPresenceConfirmed || person.tratamentInProcess">
                     <svg width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
                       <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
@@ -35,12 +78,13 @@
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]= "{ 'bg-danger' : !person.laborerPresenceConfirmed, 'bg-success': person.laborerPresenceConfirmed }">
                       {{person.laborerPresenceConfirmed ? "1" : "0"}}
                     </span>
-                  </button>    
+                  </button>
+              </div>
             </td>
         </tr>
     </tbody>
   </table>
-
+</div>
 <!-- Modal -->
 <div class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

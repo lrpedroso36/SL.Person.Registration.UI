@@ -12,8 +12,8 @@ export class PersonInterviewViewComponent implements OnInit {
   interviews: Interview[];
   interview: Interview;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private personApiService: PersonApiService) { }
 
   ngOnInit(): void {
@@ -30,10 +30,10 @@ export class PersonInterviewViewComponent implements OnInit {
     this.personApiService.getPerson(documentNumber).subscribe((personResult: PersonResult) => {
       this.person = personResult.data;
       this.interviews = personResult.data.interviews;
-      }, (errors) => { this.redirectToPersonList(errors); });
+      }, (errors) => { this.redirectToInterviewList(errors); });
     }
 
-    private redirectToPersonList(errors : string): void{
+    private redirectToInterviewList(errors : string): void{
       console.log(errors);
       this.router.navigate(["/interview/list", this.person.documentNumber]);
   }

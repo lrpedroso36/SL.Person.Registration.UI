@@ -93,31 +93,31 @@ export class PersonInterviewComponent implements OnInit {
   private getPerson(documentNumber: number){
     this.personApiService.getPerson(documentNumber).subscribe((personResult: PersonResult) => {
       this.person = personResult.data;
-    }, (errors) => { this.redirectToPersonList(errors); });
+    }, (errors) => { this.redirectToInterviewList(errors); });
   }
 
   private getInterviewType(){
     this.lookupApiService.getInterview().subscribe((lookups: Lookup[]) => {
       this.interviewTypes = lookups;
-    }, (errors) => { this.redirectToPersonList(errors); });
+    }, (errors) => { this.redirectToInterviewList(errors); });
   }
 
   private getTreatmentTypes(){
     this.lookupApiService.getTreatment().subscribe((lookups: Lookup[]) => {
       this.treatmentTypes = lookups;
-    }, (errors) => { this.redirectToPersonList(errors); });
+    }, (errors) => { this.redirectToInterviewList(errors); });
   }
 
   private getWeakDayTypes(){
     this.lookupApiService.getWeakDay().subscribe((lookups: Lookup[]) => {
       this.weakDayTypes = lookups;
-    }, (errors) => { this.redirectToPersonList(errors); });
+    }, (errors) => { this.redirectToInterviewList(errors); });
   }
 
   private getInterviewers() {
     this.personApiService.getPeopleByPersonType("Entrevistador").subscribe((peopleResult: PeopleResult) => {
       this.interviewers = peopleResult.data;
-    }, (errors) => { this.redirectToPersonList(errors); });
+    }, (errors) => { this.redirectToInterviewList(errors); });
   };
 
   private showNotification(errors: string[]): void{
@@ -125,7 +125,7 @@ export class PersonInterviewComponent implements OnInit {
     $('#notificationModal').modal('show');
   }
 
-  private redirectToPersonList(errors : string): void{
+  private redirectToInterviewList(errors : string): void{
     console.log(errors);
     this.router.navigate(["/interview/list"]);
   }

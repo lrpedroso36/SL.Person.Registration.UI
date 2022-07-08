@@ -1,5 +1,4 @@
-import { uniqueSort } from "jquery";
-import { Interview, Lookup } from "..";
+import { Assignment, Interview, Lookup } from "..";
 
 export class Person {
     public lookupsPersonType: Lookup[] = [];
@@ -25,7 +24,8 @@ export class Person {
                 public tratamentInProcess? : boolean,
                 public tratamentPresenceConfirmed? : boolean,
                 public enabledTratamentView? : boolean,
-                public interviews?: Interview[]) 
+                public interviews?: Interview[],
+                public assignments? : Assignment[]) 
     {
         this.birthDate = this.getBirthDate(birthDate);
     }
@@ -75,7 +75,6 @@ export class Person {
     }
 
     getLookupsGender(listLookups: Lookup[]): void{
-        this.lookupsGenderType.push(new Lookup(0, null, "Selecione"));
         for (let i = 0; i < listLookups.length; i++) {
             const resultChecked = this.gender === undefined ? false : this.gender === listLookups[i].name;
             const lookup = new Lookup(listLookups[i].id, listLookups[i].name, listLookups[i].description, resultChecked);

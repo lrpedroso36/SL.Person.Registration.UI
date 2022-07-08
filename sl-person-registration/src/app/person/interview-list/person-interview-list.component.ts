@@ -11,6 +11,9 @@ declare var $ : any;
 export class PersonInterviewListComponent implements OnInit {
   people: Person[];
   errors: string[];
+  private name: string;
+  private personType: string;
+  private documentNumber: string;
 
   constructor(private route: ActivatedRoute,
               private personApiService: PersonApiService,
@@ -20,6 +23,39 @@ export class PersonInterviewListComponent implements OnInit {
     var documentNumber = this.route.snapshot.params['documentNumber'];
     if(documentNumber != undefined){
       this.getPeopleInService(documentNumber);
+    }
+  }
+
+  get validateSelectParameters() :boolean {
+    return this.validateSelectPersonType() || this.validateSelectName() || this.validateSelectDocumentNumber();
+  }
+
+  get validateName() :boolean{
+    return !this.validateSelectName() && this.validateSelectDocumentNumber();
+  }
+
+  get validateDocumentNumber(): boolean {
+    return this.validateSelectName() && !this.validateSelectDocumentNumber();
+  }
+
+  selectPersonType(event: any) : void {
+    var parameter = event.target.value;
+    if(parameter.length >0){
+      this.personType = event.target.value;
+    }
+  }
+
+  selectName(event: any) : void {
+    var parameter = event.target.value;
+    if(parameter != null && parameter.length >= 3){
+      this.name = parameter;
+    }
+  }
+
+  selectDocumentNumner(event: any): void {
+    var parameter = event.target.value
+    if(parameter != undefined && parameter.length >= 3){
+      this.documentNumber = parameter;
     }
   }
 
@@ -61,6 +97,18 @@ export class PersonInterviewListComponent implements OnInit {
           this.showNotification(errors);
       });
     }
+  }
+
+  private validateSelectPersonType(): boolean{
+    return this.personType != undefined && this.personType.length > 0;
+  }
+
+  private validateSelectName() : boolean{
+    return this.name != undefined && this.name.length > 3;
+  }
+
+  private validateSelectDocumentNumber() : boolean{
+    return this.documentNumber != undefined && this.documentNumber.length > 3;
   }
 
   private showNotification(errors: string[]): void{

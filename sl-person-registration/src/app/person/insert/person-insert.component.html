@@ -69,6 +69,7 @@
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Genero</label>
                 <select class="form-control" id="genderSelect" (change)="setGender($event)">
+                  <option value="">Selecione</option>  
                   <option *ngFor="let item of person.lookupsGenderType" value="{{item.name}}">{{item.description}}</option>
                 </select>
               </div>
