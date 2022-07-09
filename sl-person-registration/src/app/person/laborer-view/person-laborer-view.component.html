@@ -1,31 +1,32 @@
 <br/>
-<div class="container">
-  <h3>Tarefas - {{person.name}}</h3>
-  <br/>
-  <table class="table table-hover table-light">
-    <thead>
-        <tr>
-          <th>Data</th>
-          <th>Presença</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of assignments">
-            <td>{{item.date}}</td>
-            <td>{{item.presence}}</td>
-        </tr>
-    </tbody>
-  </table>
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-primary" type="button" [routerLink]="['/laborer/list', person.documentNumber]">Voltar</button>
+<h1 class="h3 mb-4 text-gray-800">Tarefas - {{person.name}}</h1>
+<div class="card shadow mb-4 border-left-primary">
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+          <tr>
+            <th>Data</th>
+            <th>Presença</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of assignments">
+              <td>{{item.date}}</td>
+              <td>{{item.presence}}</td>
+          </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-primary" type="button" [routerLink]="['/laborer/list', person.documentNumber]">Voltar</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>  
+</div>
 
 
 

@@ -1,18 +1,35 @@
-<div class="row g-2">
-    <div class="col-md-1">
-        <ul class="nav flex-column">
+<body id="page-top">
+    <div id="wrapper"> 
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" [routerLink]="['person/list']">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Seara Admin</div>
+            </a>
+            <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="#" [routerLink]="['person/list']">Cadastro</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" [routerLink]="['person/list']">Escalas</a>
+            </li>
+            <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="#" [routerLink]="['laborer/list']">Tarefa</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" [routerLink]="['interview/list']">Entrevistas</a>
             </li>
-        </ul>
+	    </ul>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <div class="container-fluid">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-10">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+</body>
+
+

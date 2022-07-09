@@ -1,98 +1,92 @@
 <br/>
-<div class="container">
-  <h3>Entrevista</h3>
-  <br/>
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Tipo de pessoa</label>      
-        <select class="form-control" id="treatmentSelect" (change)="selectPersonType($event)">
-          <option value="">Selecione</option>  
-          <!-- <option *ngFor="let item of lookups" value="{{item.name}}">{{item.description}}</option> -->
-        </select>
+<h1 class="h3 mb-4 text-gray-800">Entrevistas</h1>
+<div class="card shadow mb-4 border-left-primary">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Tipo de pessoa</label>      
+          <select class="form-control" id="treatmentSelect" (change)="selectPersonType($event)">
+            <option value="">Selecione</option>  
+            <option *ngFor="let item of personList.lookups" value="{{item.name}}">{{item.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Nome</label>      
+          <input type="text" class="form-control" id="search" placeholder="Digite no mínimo 3 caracteres" (keyup)="selectName($event)" [disabled]="personList.validateName">
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Documento</label>      
+          <input type="number" class="form-control" id="search" placeholder="Digite o documento" (keyup)="selectDocumentNumner($event)" [disabled]="personList.validateDocumentNumber">
+        </div>
       </div>
     </div>
-    <div class="col">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Nome</label>      
-        <input type="text" class="form-control" id="search" placeholder="Digite no mínimo 3 caracteres" (keyup)="selectName($event)" [disabled]="validateName">
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Documento</label>      
-        <input type="number" class="form-control" id="search" placeholder="Digite o documento" (keyup)="selectDocumentNumner($event)" [disabled]="validateDocumentNumber">
-      </div>
-    </div>
-  </div>
-  <br/>
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button type="button" class="btn btn-outline-primary" title="Buscar Todos" [disabled]="!validateSelectParameters">
-            <span>Buscar </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-primary" title="Buscar Todos" (click)="getPeople()" [disabled]="!personList.validateSelectParameters">
+              <span>Buscar</span>
+            </button>
+            <button type="button" class="btn btn-success" [routerLink]="['/person/insert']" title="Inserir Frequentador">
+              <span>Novo </span>
           </button>
-          <button type="button" class="btn btn-outline-success" [routerLink]="['/person/insert']" title="Inserir Frequentador">
-            <span>Novo </span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-              <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-            </svg>
-         </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <br/>
-  <table class="table table-hover table-light">
-    <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Documento</th>
-          <th>Tipo</th>
-          <th class="text-center">Entrevistas</th>
-          <th class="text-center">Tratamento</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let person of people">
-            <td>{{person.name}}</td>
-            <td>{{person.documentNumber}}</td>
-            <td>{{person.types}}</td>
-            <td class="text-center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary" title="Inserir entrevista" [routerLink]="['/interview', person.documentNumber]" [disabled]="person.tratamentInProcess">
-                <svg width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
-                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                </svg>
+</div>
+  <div class="card shadow mb-4 border-left-primary">
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Documento</th>
+              <th>Tipo</th>
+              <th class="text-center">Entrevista</th>
+              <th class="text-center">Tratamento</th>
+              <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let person of personList.people">
+                <td>{{person.name}}</td>
+                <td>{{person.documentNumber}}</td>
+                <td>{{person.types}}</td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm" title="Visualizar" [routerLink]="['/interview/view', person.documentNumber]" [disabled]="!person.enabledTratamentView">
+                      Visualizar
+                  </button>
+                </td>
+                <td class="text-center">
+                  <div [hidden]="!person.tratamentInProcess">
+                    <button type="button" class="btn btn-primary position-relative btn-sm" title="Presença Tratamento" (click)="presenceTratament($event, person)" [disabled]="person.tratamentPresenceConfirmed">
+                      {{person.tratamentPresenceConfirmed ? "Confirmada" : "Não confirmada"}}
+                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]= "{ 'bg-danger' : !person.tratamentPresenceConfirmed, 'bg-success': person.tratamentPresenceConfirmed }">
+                        {{person.tratamentPresenceConfirmed ? "1" : "0"}}
+                      </span>
+                    </button> 
+                  </div> 
+                  <div style="font-size: small;" [hidden]="person.tratamentInProcess">
+                      Nenhuma em andamento
+                  </div>                  
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" title="Inserir entrevista" [routerLink]="['/interview', person.documentNumber]" [disabled]="person.tratamentInProcess">
+                    Inserir
                 </button>
-                <button type="button" class="btn btn-outline-primary" title="Visualizar" [routerLink]="['/interview/view', person.documentNumber]" [disabled]="!person.enabledTratamentView">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </button>
-            </div>
-            </td>
-            <td class="text-center">
-              <button type="button" class="btn btn-outline-primary position-relative" title="Presença Tratamento" (click)="presenceTratament($event, person)" [hidden]="!person.tratamentInProcess" [disabled]="person.tratamentPresenceConfirmed">
-                <svg width="16" height="16" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
-                  <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                  <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                </svg>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]= "{ 'bg-danger' : !person.tratamentPresenceConfirmed, 'bg-success': person.tratamentPresenceConfirmed }">
-                   {{person.tratamentPresenceConfirmed ? "1" : "0"}}
-                </span>
-              </button>    
-            </td>
-        </tr>
-    </tbody>
-  </table>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 <!-- Modal -->
 <div class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -106,7 +100,7 @@
         <div >
           <div class="col">
             <div class="form-group">
-              <span *ngFor="let error of errors">
+              <span *ngFor="let error of personList.errors">
                 {{error}}
               </span>
             </div>

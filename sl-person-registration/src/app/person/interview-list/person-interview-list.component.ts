@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InterviewApiService, PeopleResult, Person, PersonApiService } from '..';
+import { InterviewApiService, PeopleResult, Person, PersonApiService, PersonListComponentService } from '..';
 declare var $ : any;
 
 @Component({
@@ -9,111 +9,58 @@ declare var $ : any;
   styleUrls: ['./person-interview-list.component.css']
 })
 export class PersonInterviewListComponent implements OnInit {
-  people: Person[];
-  errors: string[];
-  private name: string;
-  private personType: string;
-  private documentNumber: string;
 
   constructor(private route: ActivatedRoute,
-              private personApiService: PersonApiService,
-              private interviewApiService: InterviewApiService) { }
+              private interviewApiService: InterviewApiService,
+              public personList: PersonListComponentService) { }
 
   ngOnInit(): void {
     var documentNumber = this.route.snapshot.params['documentNumber'];
     if(documentNumber != undefined){
-      this.getPeopleInService(documentNumber);
+      this.personList.setDocumentNumber(documentNumber);
+      this.personList.getPeople();
     }
-  }
-
-  get validateSelectParameters() :boolean {
-    return this.validateSelectPersonType() || this.validateSelectName() || this.validateSelectDocumentNumber();
-  }
-
-  get validateName() :boolean{
-    return !this.validateSelectName() && this.validateSelectDocumentNumber();
-  }
-
-  get validateDocumentNumber(): boolean {
-    return this.validateSelectName() && !this.validateSelectDocumentNumber();
+    this.personList.getPersonType();
+    this.personList.cleanParameters();
   }
 
   selectPersonType(event: any) : void {
-    var parameter = event.target.value;
-    if(parameter.length >0){
-      this.personType = event.target.value;
-    }
+    this.personList.setPersonType(event.target.value);
   }
 
   selectName(event: any) : void {
-    var parameter = event.target.value;
-    if(parameter != null && parameter.length >= 3){
-      this.name = parameter;
-    }
+    this.personList.setName(event.target.value);
   }
 
   selectDocumentNumner(event: any): void {
-    var parameter = event.target.value
-    if(parameter != undefined && parameter.length >= 3){
-      this.documentNumber = parameter;
+    this.personList.setDocumentNumber(event.target.value);
+  }
+
+  getPeople() : void {
+    this.personList.getPeople();
+
+    if(this.personList.errors != undefined && this.personList.errors.length > 0){
+      this.showNotification(this.personList.errors);
     }
-  }
-
-  getPeople(event: any) : void {
-    var parameter = event.target.value;
-    this.getPeopleInService(parameter);
-  }
-
-  getPeopleByPersonType() : void {
-    this.getPeopleByPersonTypeInService();
+    this.personList.cleanParameters();
   }
 
   presenceTratament(event: any, person: Person): void{
     event.preventDefault();
     if(confirm('Confirmar presença para o tarefeiro "' + person.name +'"?')){
       this.interviewApiService.interviewPresence(person.documentNumber).subscribe((data: {}) => {
-        this.errors = [];
-        this.getPeopleInService(person.name.substring(0,5))
+        this.personList.setName(person.name.substring(0,4));
+        this.personList.getPeople();
+        this.personList.cleanParameters();
       }, (errors) => { 
         this.showNotification(errors);
-        this.getPeopleInService(person.name.substring(0,5))
       });
     }
-  }
-
-  private getPeopleByPersonTypeInService() : void {
-    this.personApiService.getPeopleByPersonType('Assistido').subscribe((peopleResult: PeopleResult) => {
-      this.people = peopleResult.data;
-    }, (errors) => {
-        this.showNotification(errors);
-    });
-  }
-  
-  private getPeopleInService(parameter: string): void{
-    if(parameter != null && parameter.length >= 3){
-      this.personApiService.getPeopleParameter(parameter).subscribe((peopleResult: PeopleResult) => {
-        this.people = peopleResult.data;
-      }, (errors) => {
-          this.showNotification(errors);
-      });
-    }
-  }
-
-  private validateSelectPersonType(): boolean{
-    return this.personType != undefined && this.personType.length > 0;
-  }
-
-  private validateSelectName() : boolean{
-    return this.name != undefined && this.name.length > 3;
-  }
-
-  private validateSelectDocumentNumber() : boolean{
-    return this.documentNumber != undefined && this.documentNumber.length > 3;
   }
 
   private showNotification(errors: string[]): void{
-    this.errors = errors;
-    this.people = [];
+    this.personList.people = [];
+    this.personList.errors = errors;
     $('#notificationModal').modal('show');
   }
 }

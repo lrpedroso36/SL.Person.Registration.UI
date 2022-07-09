@@ -38,6 +38,10 @@ export class Interview {
         this.type = type;
     }
 
+    get getStatus(): boolean{
+        return this.status == "Concluído";
+    }
+
     validateInterviewerDocument() : boolean{
         return this.interviewerDocument != undefined && this.interviewerDocument != 0;
     }

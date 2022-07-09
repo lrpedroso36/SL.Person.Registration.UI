@@ -1,13 +1,8 @@
-<form #formPerson="ngForm">
-    <br/>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <h3>Editar</h3>
-          </div>
-        </div>
-      </div>
+<br/>
+<h1 class="h3 mb-4 text-gray-800">Editar</h1>
+<div class="card shadow mb-4 border-left-primary">
+  <div class="card-body">
+    <form #formPerson="ngForm">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Gerais</button>
@@ -20,12 +15,11 @@
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <br/>
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="row">
               <div class="col">
                 <label for="exampleFormControlInput1">Tipo da pessoa</label>
-                  <div class="card-body text-center form-control" [ngClass]= "{ 'is-invalid' : !validateTypes, 'is-valid': validateTypes }">
+                  <div class="card-body text-center form-control padding-buttom-40" [ngClass]= "{ 'is-invalid' : !validateTypes, 'is-valid': validateTypes }">
                     <div class="form-check form-check-inline" *ngFor="let item of person.lookupsPersonType">
                       <input class="form-check-input" type="checkbox" id="inlineCheckbox{{item.id}}" value="{{item.name}}" [checked]="item.checked" (change)="setPersonType($event)">
                       <label class="form-check-label" for="inlineCheckbox{{item.id}}">{{item.description}}</label>
@@ -36,7 +30,6 @@
               </div>
             </div>
             </div>
-            <br/>
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -48,7 +41,6 @@
                 </div>
               </div>
             </div>
-            <br/>
             <div class="row">
                 <div class="col">
                   <div class="form-group">
@@ -75,7 +67,6 @@
                   </div>
                 </div>
               </div>
-              <br/>
           </div>
           <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <div class="row">
@@ -92,7 +83,6 @@
                 </div>
               </div>
             </div>
-            <br/>
           </div>
           <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
             <div class="row">
@@ -109,7 +99,6 @@
                 </div>
               </div>
             </div>
-            <br/>
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -130,7 +119,6 @@
                 </div>
               </div>
             </div>
-            <br/>
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -145,7 +133,6 @@
                 </div>
               </div>
             </div>
-            <br/>
           </div>
         </div>
         <div class="row">
@@ -158,9 +145,9 @@
             </div>
           </div>
         </div>
-      </div>
     </form>
-    
+  </div>
+</div>
     <!-- Modal -->
     <div class="modal fade" id="notificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
