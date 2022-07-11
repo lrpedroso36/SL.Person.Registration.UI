@@ -9,7 +9,7 @@ export const routes: Routes = [
         redirectTo: 'person/list',
         pathMatch: 'full'
     },
-    ...PersonRoutes    
+    ...PersonRoutes,
 ];
 
 @NgModule({

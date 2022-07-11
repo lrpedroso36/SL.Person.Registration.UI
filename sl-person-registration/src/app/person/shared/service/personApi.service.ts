@@ -22,8 +22,21 @@ export class PersonApiService extends BaseApiService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  getPeopleParameter(parameter : string) : Observable<PeopleResult> {
-    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list/${parameter}`;
+  getPeople(personType: string, name: string, documentNumber: string) : Observable<PeopleResult> {
+    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list/?`;
+
+    if(name != ""){
+      urlGetPeopleParameter += `name=${name}`;
+    }
+
+    if(documentNumber != ""){
+      urlGetPeopleParameter += `&documentNumber=${parseInt(documentNumber)}`;
+    }
+
+    if(personType != null){
+      urlGetPeopleParameter += `&personType=${personType}`;
+    }
+
     return this.httpClient.get<PeopleResult>(urlGetPeopleParameter)
       .pipe(retry(1), catchError(super.handleError))
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Assignment, Person, PersonApiService, PersonResult, Result } from '..';
+import { Assignment, Person, PersonApiService, PersonResult } from '../../shared';
 
 @Component({
   selector: 'app-person-laborer-view',
@@ -17,6 +17,7 @@ export class PersonLaborerViewComponent implements OnInit {
 
   ngOnInit(): void {
     let documentNumber = + this.route.snapshot.params['documentNumber'];
+    this.person = new Person();
     this.getPersonApiService(documentNumber);
   }
 

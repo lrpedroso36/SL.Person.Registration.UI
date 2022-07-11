@@ -3,11 +3,11 @@ import { Routes } from "@angular/router";
 import { PersonListComponent } from "./list";
 import { PersonInsertComponent } from "./insert";
 import { PersonEditComponent } from "./edit";
-import { PersonInterviewComponent } from "./interview";
-import { PersonLaborerComponent } from "./laborer-list";
-import { PersonInterviewListComponent } from "./interview-list";
-import { PersonInterviewViewComponent } from "./interview-view";
-import { PersonLaborerViewComponent } from "./laborer-view";
+import { PersonLaborerComponent } from "./laborer/list";
+import { PersonLaborerViewComponent } from "./laborer/view";
+import { PersonInterviewListComponent } from "./interview/list";
+import { PersonInterviewViewComponent } from "./interview/view";
+import { PersonInterviewComponent } from "./interview/insert";
 
 export const PersonRoutes: Routes = [
     {

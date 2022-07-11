@@ -93,7 +93,7 @@ export class Person {
     }
 
     validateTypes() : boolean {
-        return this.types != undefined && this.types.length > 0;
+        return this.types != null && this.types.length > 0;
     }
 
     validateDocumentNumber() : boolean {

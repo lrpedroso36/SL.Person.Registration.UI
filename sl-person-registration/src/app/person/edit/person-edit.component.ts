@@ -26,6 +26,7 @@ export class PersonEditComponent implements OnInit {
 
   ngOnInit(): void {
     let documentNumber = + this.route.snapshot.params['documentNumber'];
+    this.person = new Person();
     this.getPerson(documentNumber);
   }
 

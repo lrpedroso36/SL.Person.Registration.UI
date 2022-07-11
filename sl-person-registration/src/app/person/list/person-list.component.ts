@@ -24,7 +24,7 @@ export class PersonListComponent implements OnInit {
       this.personList.setDocumentNumber(documentNumber);
       this.personList.getPeople();
     }
-    this.personList.getPersonType();
+    this.personList.getLookupsPersonType();
     this.personList.cleanParameters();
   }
 
@@ -46,6 +46,7 @@ export class PersonListComponent implements OnInit {
       this.showNotification(this.personList.errors);
     }
     this.personList.cleanParameters();
+    this.personList.getLookupsPersonType();
   }
 
   deletePerson($event: any, person: Person){

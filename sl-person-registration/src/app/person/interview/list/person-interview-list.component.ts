@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InterviewApiService, PeopleResult, Person, PersonApiService, PersonListComponentService } from '..';
+import { PersonListComponentService } from '../../list';
+import { InterviewApiService, Person } from '../../shared';
 declare var $ : any;
 
 @Component({
@@ -20,7 +21,7 @@ export class PersonInterviewListComponent implements OnInit {
       this.personList.setDocumentNumber(documentNumber);
       this.personList.getPeople();
     }
-    this.personList.getPersonType();
+    this.personList.getLookupsPersonType();
     this.personList.cleanParameters();
   }
 
@@ -43,6 +44,7 @@ export class PersonInterviewListComponent implements OnInit {
       this.showNotification(this.personList.errors);
     }
     this.personList.cleanParameters();
+    this.personList.getLookupsPersonType();
   }
 
   presenceTratament(event: any, person: Person): void{

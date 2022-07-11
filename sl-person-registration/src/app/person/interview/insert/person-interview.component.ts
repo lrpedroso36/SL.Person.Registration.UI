@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Interview, InterviewApiService, Lookup, LookupApiService, PeopleResult, Person, PersonApiService, PersonResult } from '..';
+import { Interview, InterviewApiService, Lookup, LookupApiService, PeopleResult, Person, PersonApiService, PersonResult } from '../../shared';
 declare var $ : any;
 
 @Component({

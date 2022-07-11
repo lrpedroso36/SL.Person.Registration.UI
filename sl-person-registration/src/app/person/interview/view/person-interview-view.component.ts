@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Interview, Person, PersonApiService, PersonResult } from '..';
+import { Interview, Person, PersonApiService, PersonResult } from '../../shared';
 
 @Component({
   selector: 'app-person-interview-view',

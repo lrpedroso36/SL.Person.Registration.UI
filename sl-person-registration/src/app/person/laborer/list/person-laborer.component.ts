@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AssignmentApiService, Person, PersonListComponentService } from '..';
+import { PersonListComponentService } from '../../list';
+import { AssignmentApiService, Person } from '../../shared';
 declare var $ : any;
 
 @Component({
@@ -20,7 +21,7 @@ export class PersonLaborerComponent implements OnInit {
       this.personList.setDocumentNumber(documentNumber);
       this.personList.getPeople();
     }
-    this.personList.getPersonType();
+    this.personList.getLookupsPersonType();
     this.personList.cleanParameters();
   }
 
@@ -42,6 +43,7 @@ export class PersonLaborerComponent implements OnInit {
       this.showNotification(this.personList.errors);
     }
     this.personList.cleanParameters();
+    this.personList.getLookupsPersonType();
   }
 
   presenceAssignment($event: any, person: Person){
