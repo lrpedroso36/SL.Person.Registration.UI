@@ -115,7 +115,7 @@ export class PersonInterviewComponent implements OnInit {
   }
 
   private getInterviewers() {
-    this.personApiService.getPeopleByPersonType("Entrevistador").subscribe((peopleResult: PeopleResult) => {
+    this.personApiService.getPeople("Entrevistador", "","").subscribe((peopleResult: PeopleResult) => {
       this.interviewers = peopleResult.data;
     }, (errors) => { this.redirectToInterviewList(errors); });
   };

@@ -23,7 +23,7 @@ export class PersonApiService extends BaseApiService {
   }
 
   getPeople(personType: string, name: string, documentNumber: string) : Observable<PeopleResult> {
-    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list/?`;
+    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}?`;
 
     if(name != ""){
       urlGetPeopleParameter += `name=${name}`;
@@ -37,18 +37,6 @@ export class PersonApiService extends BaseApiService {
       urlGetPeopleParameter += `&personType=${personType}`;
     }
 
-    return this.httpClient.get<PeopleResult>(urlGetPeopleParameter)
-      .pipe(retry(1), catchError(super.handleError))
-  }
-
-  getPeopleParameterAndType(type: string, parameter: string) : Observable<PeopleResult> {
-    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list/${parameter}?personType=${type}`;
-    return this.httpClient.get<PeopleResult>(urlGetPeopleParameter)
-      .pipe(retry(1), catchError(super.handleError))
-  }
-
-  getPeopleByPersonType(personType : string) : Observable<PeopleResult> {
-    var urlGetPeopleParameter = `${this.configuration.urlApiPerson}list-persontype/${personType}`;
     return this.httpClient.get<PeopleResult>(urlGetPeopleParameter)
       .pipe(retry(1), catchError(super.handleError))
   }
