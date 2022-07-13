@@ -25,15 +25,15 @@ export class PersonApiService extends BaseApiService {
   getPeople(personType: string, name: string, documentNumber: string) : Observable<PeopleResult> {
     var urlGetPeopleParameter = `${this.configuration.urlApiPerson}?`;
 
-    if(name != ""){
+    if(name != undefined && name != ""){
       urlGetPeopleParameter += `name=${name}`;
     }
 
-    if(documentNumber != ""){
+    if(documentNumber != undefined && documentNumber != ""){
       urlGetPeopleParameter += `&documentNumber=${parseInt(documentNumber)}`;
     }
 
-    if(personType != null){
+    if(personType != undefined && personType != null){
       urlGetPeopleParameter += `&personType=${personType}`;
     }
 
@@ -41,8 +41,8 @@ export class PersonApiService extends BaseApiService {
       .pipe(retry(1), catchError(super.handleError))
   }
 
-  getPerson(documentNumber: number) : Observable<PersonResult>{
-    var urlGetPerson = `${this.configuration.urlApiPerson}${documentNumber}`;
+  getPerson(id: string) : Observable<PersonResult>{
+    var urlGetPerson = `${this.configuration.urlApiPerson}${id}`;
     return this.httpClient.get<PersonResult>(urlGetPerson)
       .pipe(retry(1), catchError(super.handleError));
   }
@@ -57,8 +57,8 @@ export class PersonApiService extends BaseApiService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  deletePerson(documentNumber: number) : Observable<Result>{
-    return this.httpClient.delete<Result>(this.configuration.urlApiPerson + documentNumber)
+  deletePerson(id: string) : Observable<Result>{
+    return this.httpClient.delete<Result>(this.configuration.urlApiPerson + id)
       .pipe(retry(1), catchError(this.handleError));
   }
 }

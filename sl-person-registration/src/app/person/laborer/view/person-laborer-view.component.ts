@@ -16,13 +16,13 @@ export class PersonLaborerViewComponent implements OnInit {
               private personApiService: PersonApiService) { }
 
   ngOnInit(): void {
-    let documentNumber = + this.route.snapshot.params['documentNumber'];
+    var id = this.route.snapshot.params['id'];
     this.person = new Person();
-    this.getPersonApiService(documentNumber);
+    this.getPersonApiService(id);
   }
 
-  private getPersonApiService(documentNumber: number) :void {
-    this.personApiService.getPerson(documentNumber).subscribe((personResult: PersonResult) => {
+  private getPersonApiService(id: string) :void {
+    this.personApiService.getPerson(id).subscribe((personResult: PersonResult) => {
       this.person = personResult.data;
       this.assignments = personResult.data.assignments;
     },(errors) => { this.redirectToLaborerList(errors); });
@@ -30,6 +30,6 @@ export class PersonLaborerViewComponent implements OnInit {
 
   private redirectToLaborerList(errors: string):void{
     console.log(errors);
-    this.router.navigate(["laborer/list", this.person.documentNumber]);
+    this.router.navigate(["laborer/list", this.person.id]);
   }
 }

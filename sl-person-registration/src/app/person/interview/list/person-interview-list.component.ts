@@ -16,10 +16,9 @@ export class PersonInterviewListComponent implements OnInit {
               public personList: PersonListComponentService) { }
 
   ngOnInit(): void {
-    var documentNumber = this.route.snapshot.params['documentNumber'];
-    if(documentNumber != undefined){
-      this.personList.setDocumentNumber(documentNumber);
-      this.personList.getPeople();
+    var id = this.route.snapshot.params['id'];
+    if(id != undefined && id != ""){
+      this.personList.getPeopleById(id);
     }
     this.personList.getLookupsPersonType();
     this.personList.cleanParameters();
@@ -50,7 +49,7 @@ export class PersonInterviewListComponent implements OnInit {
   presenceTratament(event: any, person: Person): void{
     event.preventDefault();
     if(confirm('Confirmar presença para o tarefeiro "' + person.name +'"?')){
-      this.interviewApiService.interviewPresence(person.documentNumber).subscribe((data: {}) => {
+      this.interviewApiService.interviewPresence(person.id).subscribe((data: {}) => {
         this.personList.setName(person.name.substring(0,4));
         this.personList.getPeople();
         this.personList.cleanParameters();

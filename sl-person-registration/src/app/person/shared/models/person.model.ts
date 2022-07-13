@@ -5,7 +5,8 @@ export class Person {
     public lookupsGenderType: Lookup[] = [];
     public birthDate: string;
 
-    constructor(public types?: string[],
+    constructor(public id?: string,
+                public types?: string[],
                 public name?: string,
                 public documentNumber?: number,
                 public gender?: string,

@@ -16,12 +16,11 @@ export class PersonLaborerComponent implements OnInit {
               public personList: PersonListComponentService) { }
 
   ngOnInit(): void {
-    var documentNumber = this.route.snapshot.params['documentNumber'];
-    if(documentNumber != undefined){
-      this.personList.setDocumentNumber(documentNumber);
-      this.personList.getPeople();
-    }
     this.personList.getLookupsPersonType();
+    var id = this.route.snapshot.params['id'];
+    if(id != undefined){
+      this.personList.getPeopleById(id);
+    }
     this.personList.cleanParameters();
   }
 
@@ -49,7 +48,7 @@ export class PersonLaborerComponent implements OnInit {
   presenceAssignment($event: any, person: Person){
     $event.preventDefault();
     if(confirm('Confirmar presença para o tarefeiro "' + person.name +'"?')){
-      this.assigmentApiService.insertAssigment(person.documentNumber).subscribe((data: {}) => {
+      this.assigmentApiService.insertAssigment(person.id).subscribe((data: {}) => {
       this.personList.setName(person.name.substring(0,4));
       this.personList.getPeople();
       this.personList.cleanParameters();

@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { Lookup, LookupApiService, PeopleResult, Person, PersonApiService } from "..";
+import { Lookup, LookupApiService, PeopleResult, Person, PersonApiService, PersonResult } from "..";
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +52,15 @@ export class PersonListComponentService implements OnInit{
   getPeople(): void{
     this.personService.getPeople(this.personType, this.name, this.documentNumber).subscribe((peopleResult: PeopleResult) => {
       this.people = peopleResult.data;
+    }, (errors) => {
+      this.errors = errors;
+    });
+  }
+
+  getPeopleById(id: string): void{
+    this.personService.getPerson(id).subscribe((personResult: PersonResult) => {
+      this.people = []      
+      this.people.push(personResult.data);
     }, (errors) => {
       this.errors = errors;
     });

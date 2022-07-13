@@ -2,8 +2,8 @@ import { Tratament } from "./tratament.model";
 
 export class Interview {
     public id: string;
-    public interviewerDocument: number;
-    public interviewedDocument: number;
+    public interviewerId: string;
+    public interviewedId: string;
     public treatmentType: string;
     public weakDayType: string;
     public type: string;
@@ -18,12 +18,12 @@ export class Interview {
 
     }
     
-    setInterviewerDocument(document: number) : void {
-        this.interviewerDocument = document;
+    setInterviewerId(id: string) : void {
+        this.interviewerId = id;
     }
 
-    setinterviewedDocument(document: number) : void {
-        this.interviewedDocument = document;
+    setinterviewedId(id: string) : void {
+        this.interviewedId = id;
     }
 
     setTreatmentType(treatment: string) : void {
@@ -42,12 +42,12 @@ export class Interview {
         return this.status == "Concluído";
     }
 
-    validateInterviewerDocument() : boolean{
-        return this.interviewerDocument != undefined && this.interviewerDocument != 0;
+    validateInterviewerId() : boolean{
+        return this.interviewerId != "";
     }
 
-    validateInterviewedDocument(): boolean {
-        return this.interviewedDocument != undefined && this.interviewedDocument != 0;
+    validateInterviewedId(): boolean {
+        return this.interviewedId != "";
     }
 
     validateTreatmentType() :boolean{
@@ -71,7 +71,7 @@ export class Interview {
     }
 
     validate() : boolean {
-        return this.validateInterviewerDocument() && 
+        return this.validateInterviewerId() && 
                this.validateTreatmentType() &&
                this.validateWeakDayType()  &&
                this.validateType() &&

@@ -25,9 +25,9 @@ export class PersonInterviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.interview = new Interview();
-    let documentNumber = + this.route.snapshot.params['documentNumber'];
-    this.interview.setinterviewedDocument(documentNumber);
-    this.getPerson(documentNumber);
+    var id =  this.route.snapshot.params['id'];
+    this.interview.setinterviewedId(id);
+    this.getPerson(id);
     this.getInterviewType();
     this.getTreatmentTypes();
     this.getWeakDayTypes();
@@ -51,11 +51,11 @@ export class PersonInterviewComponent implements OnInit {
   }
 
   setPersonInterview(event: any) : void{
-      this.interview.setInterviewerDocument(event.target.value);
+      this.interview.setInterviewerId(event.target.value);
   }
 
   get validateInterviewerDocument () : boolean{
-    return this.interview.validateInterviewerDocument();
+    return this.interview.validateInterviewerId();
   }
 
   get validateType () : boolean{
@@ -85,13 +85,13 @@ export class PersonInterviewComponent implements OnInit {
   insert(): void{
     if(this.interview.validate()){
       this.interviewApiService.insertInsertInterview(this.interview).subscribe((personResult: PersonResult) => {
-        this.router.navigate(["/interview/list", this.interview.interviewedDocument]);
+        this.router.navigate(["/interview/list", this.interview.interviewedId]);
       }, (errors) => { this.showNotification(errors) });
     }
   }
 
-  private getPerson(documentNumber: number){
-    this.personApiService.getPerson(documentNumber).subscribe((personResult: PersonResult) => {
+  private getPerson(id: string){
+    this.personApiService.getPerson(id).subscribe((personResult: PersonResult) => {
       this.person = personResult.data;
     }, (errors) => { this.redirectToInterviewList(errors); });
   }

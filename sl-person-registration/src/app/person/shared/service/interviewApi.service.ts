@@ -15,13 +15,13 @@ export class InterviewApiService extends BaseApiService {
   }
 
   insertInsertInterview(interview: Interview) {
-    var url = `${this.configuration.urlApiInterview}?interviewedDocument=${interview.interviewedDocument}&interviewerDocument=${interview.interviewerDocument}`
+    var url = `${this.configuration.urlApiInterview}?interviewedId=${interview.interviewedId}&interviewerId=${interview.interviewerId}`
     return this.httpClient.post<Result>(url, interview)
     .pipe(retry(1), catchError(this.handleError));
   }
 
-  interviewPresence(documentNumber: number) {
-    var url = `${this.configuration.urlApiInterview}/presence/${documentNumber}`
+  interviewPresence(id: string) {
+    var url = `${this.configuration.urlApiInterview}/presence/${id}`
     return this.httpClient.post<Result>(url, null)
     .pipe(retry(1), catchError(this.handleError));
   }

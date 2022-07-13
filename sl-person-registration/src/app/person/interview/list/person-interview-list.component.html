@@ -60,7 +60,7 @@
                 <td>{{person.documentNumber}}</td>
                 <td>{{person.types}}</td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-primary btn-sm" title="Visualizar" [routerLink]="['/interview/view', person.documentNumber]" [disabled]="!person.enabledTratamentView">
+                    <button type="button" class="btn btn-primary btn-sm" title="Visualizar" [routerLink]="['/interview/view', person.id]" [disabled]="!person.enabledTratamentView">
                       Visualizar
                   </button>
                 </td>
@@ -78,7 +78,7 @@
                   </div>                  
                 </td>
                 <td class="text-center">
-                  <button type="button" class="btn btn-outline-secondary btn-sm" title="Inserir entrevista" [routerLink]="['/interview', person.documentNumber]" [disabled]="person.tratamentInProcess">
+                  <button type="button" class="btn btn-outline-secondary btn-sm" title="Inserir entrevista" [routerLink]="['/interview', person.id]" [disabled]="person.tratamentInProcess">
                     Inserir
                 </button>
                 </td>

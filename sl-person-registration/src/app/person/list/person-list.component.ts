@@ -52,7 +52,7 @@ export class PersonListComponent implements OnInit {
   deletePerson($event: any, person: Person){
     $event.preventDefault();
     if(confirm('Deseja remover "' + person.name +'"?')){
-      this.personService.deletePerson(person.documentNumber).subscribe((data: {}) => {
+      this.personService.deletePerson(person.id).subscribe((data: {}) => {
         this.personList.errors = [];
       }, (errors) => { 
         this.showNotification(errors);

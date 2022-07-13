@@ -9,7 +9,7 @@
                 <label>Entrevistador</label>
                 <select class="form-control" id="interviewSelect" (change)="setPersonInterview($event)" [ngClass]= "{ 'is-invalid' : !validateInterviewerDocument, 'is-valid': validateInterviewerDocument }">
                   <option value=0>Selecione</option>  
-                  <option *ngFor="let item of interviewers" value="{{item.documentNumber}}">{{item.name}}</option>          
+                  <option *ngFor="let item of interviewers" value="{{item.id}}">{{item.name}}</option>          
                 </select>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                   Selecione o entrevistador.
@@ -80,7 +80,7 @@
               <div class="form-group">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <button class="btn btn-success me-md-2" type="button" (click)="insert()" [disabled]="!validate">Salvar</button>
-                  <button class="btn btn-primary" type="button" [routerLink]="['/interview/list', person.documentNumber]">Voltar</button>
+                  <button class="btn btn-primary" type="button" [routerLink]="['/interview/list', person.id]">Voltar</button>
                 </div>
               </div>
             </div>

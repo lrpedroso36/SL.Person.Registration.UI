@@ -21,8 +21,8 @@ export class AssignmentApiService extends BaseApiService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  insertAssigment(documentNumber: number) : Observable<Result> {
-    var urlGetPerson = `${this.configuration.urlApiAssignment}${documentNumber}`;
+  insertAssigment(id: string) : Observable<Result> {
+    var urlGetPerson = `${this.configuration.urlApiAssignment}${id}`;
     return this.httpClient.put<Result>(urlGetPerson, null)
         .pipe(retry(1), catchError(this.handleError));
     }

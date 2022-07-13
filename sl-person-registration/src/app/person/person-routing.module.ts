@@ -19,7 +19,7 @@ export const PersonRoutes: Routes = [
         component: PersonListComponent
     },
     {
-        path: 'person/list/:documentNumber',
+        path: 'person/list/:id',
         component: PersonListComponent
     },
     {
@@ -27,7 +27,7 @@ export const PersonRoutes: Routes = [
         component: PersonInsertComponent
     },
     {
-        path: 'person/edit/:documentNumber',
+        path: 'person/edit/:id',
         component: PersonEditComponent
     },
     {
@@ -35,11 +35,11 @@ export const PersonRoutes: Routes = [
         component: PersonLaborerComponent
     },
     {
-        path: 'laborer/list/:documentNumber',
+        path: 'laborer/list/:id',
         component: PersonLaborerComponent
     },
     {
-        path: 'laborer/view/:documentNumber',
+        path: 'laborer/view/:id',
         component: PersonLaborerViewComponent
     },
     {
@@ -47,15 +47,15 @@ export const PersonRoutes: Routes = [
         component: PersonInterviewListComponent
     },
     {
-        path: 'interview/list/:documentNumber',
+        path: 'interview/list/:id',
         component: PersonInterviewListComponent
     },
     {
-        path: 'interview/view/:documentNumber',
+        path: 'interview/view/:id',
         component: PersonInterviewViewComponent
     },
     {
-        path: 'interview/:documentNumber',
+        path: 'interview/:id',
         component: PersonInterviewComponent
     },
 ]

@@ -17,17 +17,18 @@ export class PersonInterviewViewComponent implements OnInit {
               private personApiService: PersonApiService) { }
 
   ngOnInit(): void {
-    let documentNumber = + this.route.snapshot.params['documentNumber'];
-    this.getPerson(documentNumber);
+    this.person = new Person();
     this.interview = new Interview();
+    var id = this.route.snapshot.params['id'];
+    this.getPerson(id);
   }
 
   showDetails(interview: Interview): void{
     this.interview = interview;
   }
 
-  private getPerson(documentNumber: number) {
-    this.personApiService.getPerson(documentNumber).subscribe((personResult: PersonResult) => {
+  private getPerson(id: string) {
+    this.personApiService.getPerson(id).subscribe((personResult: PersonResult) => {
       this.person = personResult.data;
       this.interviews = personResult.data.interviews;
       }, (errors) => { this.redirectToInterviewList(errors); });
@@ -35,6 +36,6 @@ export class PersonInterviewViewComponent implements OnInit {
 
     private redirectToInterviewList(errors : string): void{
       console.log(errors);
-      this.router.navigate(["/interview/list", this.person.documentNumber]);
+      this.router.navigate(["/interview/list", this.person.id]);
   }
 }

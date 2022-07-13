@@ -25,9 +25,9 @@ export class PersonEditComponent implements OnInit {
               private addressApiService: AddressApiService) { }
 
   ngOnInit(): void {
-    let documentNumber = + this.route.snapshot.params['documentNumber'];
+    var id = this.route.snapshot.params['id'];
     this.person = new Person();
-    this.getPerson(documentNumber);
+    this.getPerson(id);
   }
 
   clearErros(): void{
@@ -87,10 +87,10 @@ export class PersonEditComponent implements OnInit {
     })
   }
 
-  private getPerson(documentNumber: number) {
-    this.personApiService.getPerson(documentNumber).subscribe((personResult: PersonResult) => {
+  private getPerson(id: string) {
+    this.personApiService.getPerson(id).subscribe((personResult: PersonResult) => {
       var person = personResult.data;
-      this.person = new Person(person.types, person.name, person.documentNumber, person.gender, person.birthDate, person.zipCode,
+      this.person = new Person(person.id, person.types, person.name, person.documentNumber, person.gender, person.birthDate, person.zipCode,
         person.street, person.number, person.neighborhood, person.complement, person.city, person.state, person.ddd, person.phoneNumber);
         this.getPersonType();
         this.getGenderType();
