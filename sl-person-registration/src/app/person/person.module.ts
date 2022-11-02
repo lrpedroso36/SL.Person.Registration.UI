@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { PersonApiService } from './shared';
-import { LookupApiService } from './shared';
-import { AddressApiService } from './shared';
+import { AssignmentApiService, InterviewApiService, PersonApiService, LookupApiService, AddressApiService, PersonListService } from './shared';
 
 import { PersonListComponent } from './list';
 import { PersonInsertComponent } from './insert';
@@ -33,9 +31,12 @@ import { PersonLaborerViewComponent } from './laborer/view';
     RouterModule
   ],
   providers: [ 
-    PersonApiService,
+    AddressApiService,
+    AssignmentApiService,
+    InterviewApiService,
     LookupApiService,
-    AddressApiService
+    PersonApiService,
+    PersonListService
   ]
 })
 export class PersonModule { }

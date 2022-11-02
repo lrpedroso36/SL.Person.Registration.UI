@@ -11,8 +11,10 @@ export * from './models/result/personResult.model';
 
 export * from './configuration/configuration.model';
 
-export * from './service/personApi.service';
-export * from './service/lookupApi.service';
-export * from './service/addressApi.service';
-export * from './service/assignmentApi.service';
-export * from './service/interviewApi.service';
+export * from './api/personApi.service';
+export * from './api/lookupApi.service';
+export * from './api/addressApi.service';
+export * from './api/assignmentApi.service';
+export * from './api/interviewApi.service';
+
+export * from  './services/personList.service';
