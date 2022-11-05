@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { InterviewApiService, Person, PersonListService } from '../../shared';
+import { InterviewApi, Person, PersonService } from '../../shared';
 declare var $ : any;
 
 @Component({
@@ -11,8 +11,8 @@ declare var $ : any;
 export class PersonInterviewListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
-              private interviewApiService: InterviewApiService,
-              public personList: PersonListService) { }
+              private interviewApiService: InterviewApi,
+              public personList: PersonService) { }
 
   ngOnInit(): void {
     var id = this.route.snapshot.params['id'];

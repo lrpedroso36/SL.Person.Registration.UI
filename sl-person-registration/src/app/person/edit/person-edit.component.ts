@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 declare var $ : any;
 
-import { AddressApiService, AddressResult, Lookup, LookupApiService, Person, PersonApiService, PersonResult } from '../shared';
+import { AddressApi, AddressResult, Lookup, LookupApi, Person, PersonApi, PersonResult } from '../shared';
 
 @Component({
   selector: 'app-person-edit',
@@ -20,9 +20,9 @@ export class PersonEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private personApiService: PersonApiService,
-              private lookupApiService: LookupApiService,
-              private addressApiService: AddressApiService) { }
+              private personApiService: PersonApi,
+              private lookupApiService: LookupApi,
+              private addressApiService: AddressApi) { }
 
   ngOnInit(): void {
     var id = this.route.snapshot.params['id'];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AssignmentApiService, Person, PersonListService } from '../../shared';
+import { AssignmentApi, Person, PersonService } from '../../shared';
 declare var $ : any;
 
 @Component({
@@ -11,8 +11,8 @@ declare var $ : any;
 export class PersonLaborerComponent implements OnInit {
     
   constructor(private route: ActivatedRoute,
-              private assigmentApiService: AssignmentApiService,
-              public personList: PersonListService) { }
+              private assigmentApiService: AssignmentApi,
+              public personList: PersonService) { }
 
   ngOnInit(): void {
     this.personList.getLookupsPersonType();

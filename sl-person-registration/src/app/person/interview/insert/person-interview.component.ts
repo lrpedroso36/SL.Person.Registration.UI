@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Interview, InterviewApiService, Lookup, LookupApiService, PeopleResult, Person, PersonApiService, PersonResult } from '../../shared';
+import { Interview, InterviewApi, Lookup, LookupApi, PeopleResult, Person, PersonApi, PersonResult } from '../../shared';
 declare var $ : any;
 
 @Component({
@@ -19,9 +19,9 @@ export class PersonInterviewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private personApiService: PersonApiService,
-              private lookupApiService: LookupApiService,
-              private interviewApiService: InterviewApiService) { }
+              private personApiService: PersonApi,
+              private lookupApiService: LookupApi,
+              private interviewApiService: InterviewApi) { }
 
   ngOnInit(): void {
     this.interview = new Interview();

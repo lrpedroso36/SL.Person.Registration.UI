@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Assignment, Person, PersonApiService, PersonResult } from '../../shared';
+import { Assignment, Person, PersonApi, PersonResult } from '../../shared';
 
 @Component({
   selector: 'app-person-laborer-view',
@@ -13,7 +13,7 @@ export class PersonLaborerViewComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private personApiService: PersonApiService) { }
+              private personApiService: PersonApi) { }
 
   ngOnInit(): void {
     var id = this.route.snapshot.params['id'];

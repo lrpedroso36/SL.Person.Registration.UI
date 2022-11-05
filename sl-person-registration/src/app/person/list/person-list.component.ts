@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 declare var $ : any;
 
-import { PersonApiService, Person, PersonListService} from '../shared';
+import { PersonApi, Person, PersonService} from '../shared';
 
 @Component({
   selector: 'app-person-list',
@@ -13,8 +13,8 @@ import { PersonApiService, Person, PersonListService} from '../shared';
 export class PersonListComponent implements OnInit {  
   
   constructor(private route: ActivatedRoute,
-              private personService: PersonApiService,
-              public personList: PersonListService) { 
+              private personService: PersonApi,
+              public personList: PersonService) { 
   }
 
   ngOnInit(): void {

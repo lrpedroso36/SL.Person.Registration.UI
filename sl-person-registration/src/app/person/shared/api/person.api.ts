@@ -4,15 +4,14 @@ import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { Person } from '../models/person.model';
-import { Result } from '../models/result.model';
-import { BaseApiService } from './baseApiService';
+import { BaseApi } from './base.api';
 import { PeopleResult } from '../models/result/peopleResult.model';
-import { PersonResult } from '..';
+import { PersonResult, Result } from '..';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonApiService extends BaseApiService {
+export class PersonApi extends BaseApi {
   
   constructor(private httpClient: HttpClient) { 
     super();

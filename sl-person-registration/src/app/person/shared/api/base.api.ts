@@ -1,7 +1,7 @@
 import { throwError } from "rxjs";
 import { Configuration } from "..";
 
-export abstract class BaseApiService{
+export abstract class BaseApi{
     public configuration = {} as Configuration;
     constructor(){
         this.configuration = new Configuration();

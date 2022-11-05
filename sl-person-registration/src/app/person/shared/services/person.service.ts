@@ -1,19 +1,18 @@
 import { Injectable, OnInit } from "@angular/core";
 
-import { LookupApiService } from "../api/lookupApi.service";
-import { PersonApiService } from "../api/personApi.service";
-
 import { Lookup } from "../models/lookup.model";
 import { Person } from "../models/person.model";
-import { Result } from "../models/result.model";
+import { Result } from "../models/result/result.model";
 import { PeopleResult } from "../models/result/peopleResult.model";
 import { PersonResult } from "../models/result/personResult.model";
+import { PersonApi } from "../api/person.api";
+import { LookupApi } from "../api/lookup.api";
 
 @Injectable({
     providedIn: 'root'
   })
 
-export class PersonListService implements OnInit{
+export class PersonService implements OnInit{
     name: string;
     personType: string;
     documentNumber: string;
@@ -22,8 +21,8 @@ export class PersonListService implements OnInit{
     people: Person[] = [];
     lookups: Lookup[] = [];
   
-    constructor(private personService: PersonApiService,
-                private lookupService: LookupApiService) { }
+    constructor(private personService: PersonApi,
+                private lookupApi: LookupApi) { }
   
     ngOnInit(): void {
      this.cleanParameters();
@@ -75,7 +74,7 @@ export class PersonListService implements OnInit{
     }
   
     getLookupsPersonType(){
-      this.lookupService.getPersonType().subscribe((lookups: Lookup[]) => {
+      this.lookupApi.getPersonType().subscribe((lookups: Lookup[]) => {
         this.lookups = lookups;
       }, (errors) => { this.errors = errors });
     }

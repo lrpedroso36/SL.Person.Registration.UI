@@ -3,15 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { Result } from '../models/result.model'
-
-
-import { BaseApiService } from './baseApiService';
+import { BaseApi } from './base.api';
+import { Result } from '../models/result/result.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AssignmentApiService extends BaseApiService {
+export class AssignmentApi extends BaseApi {
 
   constructor(private httpClient: HttpClient) {
     super();

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 declare var $ : any;
 
-import { Person, Lookup, LookupApiService, PersonApiService, AddressApiService, Address } from '../shared';
+import { Person, Lookup, Address, AddressApi, LookupApi, PersonApi } from '../shared';
 import { AddressResult } from '../shared/models/result/addressResult.model';
 
 @Component({
@@ -21,9 +21,9 @@ export class PersonInsertComponent implements OnInit {
   searchAddress: boolean = false;
 
   constructor(private router: Router,
-              private lookupApiService: LookupApiService,
-              private personApiService: PersonApiService,
-              private addressApiService: AddressApiService) { }
+              private lookupApiService: LookupApi,
+              private personApiService: PersonApi,
+              private addressApiService: AddressApi) { }
 
   ngOnInit(): void {
     this.person = new Person();

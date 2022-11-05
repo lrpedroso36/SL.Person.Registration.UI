@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
 import { AddressResult } from '../models/result/addressResult.model';
-import { BaseApiService } from './baseApiService';
+import { BaseApi } from './base.api';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddressApiService extends BaseApiService {
+export class AddressApi extends BaseApi {
 
   constructor(private httpClient: HttpClient) { 
     super();

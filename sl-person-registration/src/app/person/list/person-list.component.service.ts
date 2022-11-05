@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { Lookup, LookupApiService, PeopleResult, Person, PersonApiService, PersonResult } from "..";
+import { Lookup, LookupApi, PeopleResult, Person, PersonApi, PersonResult } from "..";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class PersonListComponentService implements OnInit{
   people: Person[] = [];
   lookups: Lookup[] = [];
 
-  constructor(private personService: PersonApiService,
-              private lookupService: LookupApiService) { }
+  constructor(private personService: PersonApi,
+              private lookupService: LookupApi) { }
 
   ngOnInit(): void {
    this.cleanParameters();
