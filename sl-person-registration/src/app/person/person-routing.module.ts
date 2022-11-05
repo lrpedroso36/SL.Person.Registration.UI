@@ -8,6 +8,8 @@ import { PersonLaborerViewComponent } from "./laborer/view";
 import { PersonInterviewListComponent } from "./interview/list";
 import { PersonInterviewViewComponent } from "./interview/view";
 import { PersonInterviewComponent } from "./interview/insert";
+import { PersonWorkscheduleListComponent } from "./workschedule/list";
+import { PersonWorkscheduleInsertComponent } from "./workschedule/insert";
 
 export const PersonRoutes: Routes = [
     {
@@ -58,4 +60,12 @@ export const PersonRoutes: Routes = [
         path: 'interview/:id',
         component: PersonInterviewComponent
     },
+    {
+        path: 'workschedule/list',
+        component: PersonWorkscheduleListComponent
+    },
+    {
+        path: 'workschedule/insert',
+        component: PersonWorkscheduleInsertComponent
+    }
 ]
