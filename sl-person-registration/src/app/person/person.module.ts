@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { AssignmentApi, InterviewApi, PersonApi, LookupApi, PersonService, AddressApi } from './shared';
+import { AssignmentApi, InterviewApi, PersonApi, LookupApi, PersonService, AddressApi, WorkScheduleApi } from './shared';
 
 import { PersonListComponent } from './list';
 import { PersonInsertComponent } from './insert';
@@ -40,6 +40,7 @@ import { PersonWorkscheduleInsertComponent } from './workschedule/insert';
     InterviewApi,
     LookupApi,
     PersonApi,
+    WorkScheduleApi,
     PersonService
   ]
 })

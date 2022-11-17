@@ -65,7 +65,11 @@ export const PersonRoutes: Routes = [
         component: PersonWorkscheduleListComponent
     },
     {
-        path: 'workschedule/insert',
+        path: 'workschedule/list/:id',
+        component: PersonWorkscheduleListComponent
+    },
+    {
+        path: 'workschedule/:id',
         component: PersonWorkscheduleInsertComponent
     }
 ]

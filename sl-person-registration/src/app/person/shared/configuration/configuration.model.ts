@@ -5,6 +5,7 @@ export class Configuration {
     public urlApiAddress : string;
     public urlApiAssignment : string;
     public urlApiInterview: string;
+    public urlApiWorkSchedule: string;
 
     constructor(){
         this.urlApiPerson ="http://localhost:5001/api/v1/person/";
@@ -13,5 +14,6 @@ export class Configuration {
         this.urlApiAddress = "http://localhost:5001/api/v1/address/";
         this.urlApiAssignment = "http://localhost:5001/api/v1/assignment/";
         this.urlApiInterview = "http://localhost:5001/api/v1/interview";
+        this.urlApiWorkSchedule = "http://localhost:5001/api/v1/work-schedule/"
     }
 }
