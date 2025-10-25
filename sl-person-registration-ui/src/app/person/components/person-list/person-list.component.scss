@@ -1,0 +1,17 @@
+::ng-deep {
+  td .p-tag {
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .p-datatable-filter .p-datatable-column-filter-button,
+  .p-datatable-filter .p-button {
+    display: none !important;
+  }
+}

@@ -1,15 +1,16 @@
 .layout {
   display: flex;
   height: 100vh;
+  background: #fff;
 }
 
-.sidebar {
+app-side-bar {
   width: 260px;
   flex-shrink: 0;
 }
 
 .content {
   flex: 1;
-  padding: 1.5rem;
+  padding: 2.5rem 2rem 2rem 0.75rem;
   overflow-y: auto;
 }

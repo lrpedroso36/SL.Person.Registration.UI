@@ -1,0 +1,29 @@
+.side-bar {
+  position: absolute;
+  padding: 1rem;
+  height: 100%;
+  border-right: 1px solid var(--p-menu-border-color);
+}
+
+
+:host ::ng-deep {
+  .side-bar__logo {
+    border-bottom: 1px solid var(--p-menu-border-color);
+    padding-bottom: 1.15rem;
+  }
+
+  .side-bar__menu .p-menu {
+    border: none !important;
+  }
+
+  .p-menu .p-menu-submenu-label span {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    margin-bottom: 1.50rem;
+  }
+
+  .p-menu .p-menu-item span {
+    font-size: 18px !important;
+    margin-bottom: 1rem;
+  }
+}

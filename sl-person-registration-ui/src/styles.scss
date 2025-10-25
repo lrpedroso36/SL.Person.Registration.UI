@@ -1,2 +1,12 @@
 @use "tailwindcss";
 @use "primeicons/primeicons.css";
+
+.page-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--p-primary-color);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  border-left: 4px solid var(--p-primary-color);
+  padding-left: 12px;
+}
