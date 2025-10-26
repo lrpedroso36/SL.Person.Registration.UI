@@ -1,0 +1,49 @@
+<div class="person-registration-basic p-4 w-full">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- Nome -->
+    <p-floatlabel class="w-full">
+      <p-iconfield class="w-full">
+        <p-inputicon class="pi pi-user" />
+        <input
+          pInputText
+          id="name"
+          class="w-full"
+          [(ngModel)]="person.name"
+          autocomplete="off" />
+      </p-iconfield>
+      <label for="name">Nome</label>
+    </p-floatlabel>
+
+    <!-- Documento -->
+    <p-floatlabel class="w-full">
+      <p-iconfield class="w-full">
+        <p-inputicon class="pi pi-id-card" />
+        <input
+          pInputText
+          id="document"
+          class="w-full"
+          [(ngModel)]="person.documentNumber"
+          autocomplete="off" />
+      </p-iconfield>
+      <label for="document">Número do Documento</label>
+    </p-floatlabel>
+
+    <!-- Tipo de Tratamento -->
+    <p-floatlabel class="w-full">
+      <p-iconfield class="w-full">
+        <p-inputicon class="pi pi-briefcase" />
+        <p-multiSelect
+          class="w-full"
+          [options]="typeOptions"
+          [(ngModel)]="person.types"
+          optionLabel="label"
+          display="chip"
+          [maxSelectedLabels]="3">
+        </p-multiSelect>
+      </p-iconfield>
+      <label for="treatments">Tratamentos</label>
+    </p-floatlabel>
+
+  </div>
+</div>

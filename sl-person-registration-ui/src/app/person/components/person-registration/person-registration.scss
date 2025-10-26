@@ -1,0 +1,16 @@
+::ng-deep {
+  .person-registration__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .person-registration__toolbar__action {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .person-registration__content {
+    margin: 1rem 0 1rem 0;
+  }
+}

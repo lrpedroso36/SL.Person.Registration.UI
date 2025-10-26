@@ -1,21 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { PersonList } from '../../models/person-list.model';
-import { TableModule } from 'primeng/table';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { TagModule } from 'primeng/tag';
-import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
+import { PERSON_IMPORTS } from './person.list.references';
 
 @Component({
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, TableModule, TagModule, ButtonModule, TooltipModule, IconFieldModule, InputIconModule ],
+  imports: [...PERSON_IMPORTS],
   providers: [MessageService],
 })
 export class PersonListComponent implements OnInit {
@@ -26,10 +19,6 @@ export class PersonListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getItems();
-  }
-
-  filterGlobal($event: any){
-
   }
 
   onRowSelect(event: any) {
@@ -50,24 +39,27 @@ export class PersonListComponent implements OnInit {
 
   private getItems(): void {
     this.items = signal<PersonList[]>([
-      { name: 'João Silva', documentNumber: '12345678900', types: ['Tarefeiro', 'Palestrante'] },
-      { name: 'Maria Oliveira', documentNumber: '98765432100', types: ['Assistido'] },
+      { id: '1', name: 'João Silva', documentNumber: '12345678900', types: ['Tarefeiro', 'Palestrante'] },
+      { id: '2', name: 'Maria Oliveira', documentNumber: '98765432100', types: ['Assistido'] },
       {
+        id: '3',
         name: 'Pedro Santos',
         documentNumber: '45678912300',
         types: ['Palestrante', 'Entrevistador'],
       },
-      { name: 'Ana Souza', documentNumber: '32165498700', types: ['Entrevistador'] },
-      { name: 'Carlos Lima', documentNumber: '74185296300', types: ['Tarefeiro', 'Assistido'] },
-      { name: 'Fernanda Costa', documentNumber: '85296374100', types: ['Assistido', 'Todos'] },
-      { name: 'Rodrigo Alves', documentNumber: '96325874100', types: ['Todos', 'Palestrante'] },
+      { id: '4', name: 'Ana Souza', documentNumber: '32165498700', types: ['Entrevistador'] },
+      { id: '5', name: 'Carlos Lima', documentNumber: '74185296300', types: ['Tarefeiro', 'Assistido'] },
+      { id: '6', name: 'Fernanda Costa', documentNumber: '85296374100', types: ['Assistido', 'Todos'] },
+      { id: '7', name: 'Rodrigo Alves', documentNumber: '96325874100', types: ['Todos', 'Palestrante'] },
       {
+        id: '8',
         name: 'Juliana Melo',
         documentNumber: '15935748600',
         types: ['Palestrante', 'Tarefeiro', 'Entrevistador'],
       },
-      { name: 'Bruno Rocha', documentNumber: '35715948600', types: ['Entrevistador', 'Assistido'] },
+      { id: '9', name: 'Bruno Rocha', documentNumber: '35715948600', types: ['Entrevistador', 'Assistido'] },
       {
+        id: '10',
         name: 'Patrícia Dias',
         documentNumber: '25836914700',
         types: ['Tarefeiro', 'Assistido', 'Palestrante'],

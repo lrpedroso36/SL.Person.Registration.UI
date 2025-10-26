@@ -1,4 +1,21 @@
 ::ng-deep {
+  .person-list__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  .person-list__toolbar__action {
+    margin-left: auto;
+  }
+
+  .person-list__content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+
   td .p-tag {
     margin-right: 4px;
     margin-bottom: 4px;

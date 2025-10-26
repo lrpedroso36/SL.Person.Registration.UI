@@ -1,0 +1,47 @@
+<div class="person-registration">
+  <div class="person-registration__toolbar">
+    <div class="person-registration__toolbar__title">
+      <h1 class="page-title">{{ title() }}</h1>
+    </div>
+    <div class="person-registration__toolbar__action">
+      <p-button icon="pi pi-save" label="Salvar" size="large" severity="info" (onClick)="onSave()" />
+      <p-button icon="pi pi-save" label="Salvar e avançar" size="large" severity="info" (onClick)="onSaveNext()" />
+      <p-button icon="pi pi-undo" label="Voltar" size="large" severity="info" (onClick)="onBack()" />
+      <p-button icon="pi pi-times" label="Cancelar" size="large" severity="danger" [routerLink]="['person/list']" />
+    </div>
+  </div>
+  <div class="person-registration__content">
+    <p-stepper [value]="step()" class="basis-[50rem]">
+      <p-step-list>
+        <p-step [value]="1">Básicos</p-step>
+        <p-step [value]="2">Gerais</p-step>
+        <p-step [value]="3">Endereço</p-step>
+      </p-step-list>
+      <p-step-panels>
+        <p-step-panel [value]="1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col h-100">
+              <app-person-registration-basic></app-person-registration-basic>
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="2">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col h-100">
+              <app-person-registration-general></app-person-registration-general>
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="3">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col h-100">
+              <app-person-registration-address></app-person-registration-address>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
+  </div>
+</div>

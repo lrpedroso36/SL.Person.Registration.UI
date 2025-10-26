@@ -29,7 +29,7 @@ export class SideBarComponent implements OnInit {
           },
           {
             label: 'Entrevistas',
-            icon: 'pi pi-calendar-plus',
+            icon: 'pi pi-heart',
           },
           {
             label: 'Escalas',
